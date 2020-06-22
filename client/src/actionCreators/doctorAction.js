@@ -3,7 +3,7 @@ import axios from 'axios'
 export function searchSpeciality(search) {
       return function (dispatch) {
             return axios
-                  .get(`http://localhost:3010/doctor/${search}`,
+                  .get(`http://localhost:3010/${search}`,
                   //  {
                   //       headers: {
                   //             "x-auth-token": window.localStorage.getItem("token"),
@@ -12,7 +12,7 @@ export function searchSpeciality(search) {
                   )
                   .then(({ data }) => {
                         console.log(data);
-                        dispatch({ type: "SEARCH_HOTEL", payload: data });
+                        dispatch({ type: "Search_Speciality", payload: data });
                   })
                   .catch(({ err }) => {
                         console.log(err);

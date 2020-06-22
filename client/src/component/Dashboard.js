@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./Landing page/Navbar";
 import "../App.css";
 import Speciality from '../speciality.json'
-import { searchSpeciality} from '../actionCreators/action'
+import { searchSpeciality} from '../actionCreators/doctorAction'
 import {connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 class Dashboard extends Component {
@@ -11,7 +11,7 @@ class Dashboard extends Component {
    
     this.props.searchSpeciality(sp)
    
-    this.props.history.push('searchresults')
+    this.props.history.push(`/doctorprofile/${sp}`)
   }
   render() {
     // console.log(special)
