@@ -42,7 +42,7 @@ doctorController.login = function(req,res){
         bcrypt.compare(password, user.password, function(err,result){
             if(result){
                 jwt.sign(
-                    {email : user.email},
+                    {id : user._id},
                     "sharma",
                     { expiresIn : 3600},
                     (err, token) => {
@@ -61,8 +61,8 @@ doctorController.login = function(req,res){
  
     })
     
-// }
-doctorController.searchSpeciality= async(req,res)=>{
+ }
+    doctorController.searchSpeciality=async (req,res)=>{
     try{
         let speciality= req.params.search
         // console.log(speciality)
@@ -73,6 +73,31 @@ doctorController.searchSpeciality= async(req,res)=>{
     catch(err){
         console.log(err)
     }
+   }
+
+
+doctorController.addDoctor= async(req,res)=>{
+    const userId = req.user.id
+    const {name, gender, image, license, qualification,bio,specialisation,hospital,address,language,state,city,age,fees}=req.body
+    const doctor = await DoctorSchema.findOne({_id:userId})
+    // console.log(doctor)
+    doctor.name=name
+    doctor.gender=gender
+    doctor.image=image
+    doctor.license=license
+    doctor.qualification = qualification
+    doctor.bio = bio
+    doctor.specialisation = specialisation
+    doctor.hospital = hospital
+    doctor.address = address
+    doctor.language = language
+    doctor.state=state
+    doctor.city=city
+    doctor.fees=fees
+    doctor.age= age
+    doctor.save();
+    // console.log(doctor)
 }
-}
+
+
 module.exports = doctorController

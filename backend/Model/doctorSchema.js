@@ -29,7 +29,7 @@ const doctorSchema = new mongoose.Schema({
         type : String
     },
     language : {
-        type : Array
+        type : String
     }, 
     state : {
         type : String
@@ -38,18 +38,19 @@ const doctorSchema = new mongoose.Schema({
         type : String,
     },
     age:{
-        type:Number
+        type:String
     },
     fees:{
-        type: Number
+        type: String
     },
     image:{
+        type: String,
+        default:"https://res.cloudinary.com/dsmr18nsi/image/upload/v1592852682/22_yi2ky2.jpg"
+    },
+    licenseNo:{
         type: String
     },
-    LicenseNo:{
-        type: String
-    },
-    education:{
+    qualification:{
         type: String
     }
 })

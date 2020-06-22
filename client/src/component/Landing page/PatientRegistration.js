@@ -1,13 +1,31 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Navbar from './Navbar'
-
-class PatientRegistrtation extends React.Component {
-    state = {
-        name: "",
-        gender: "",
-        age: ""
-    };
-    render() {
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
+function PatientRegistrtation(){
+    const [name, setName] = useState("")
+    const [age, setAge] = useState("")
+    const [gender, setGender] = useState("")
+    const [state, setState] = useState("")
+    const [city, setCity] = useState("")
+    const { register, handleSubmit, errors } = useForm();
+    const patientregister=(data)=>{
+        console.log("patient data", data)
+        let token = localStorage.getItem("myAuth");
+        const pat= {name,age,gender,state,city}
+        let request = axios({
+            method: "POST",
+            url: "http://localhost:3010/addpatient",
+            data: pat,
+            headers: {
+                "x-auth-token": token
+            },
+        });
+        request.then(res => {
+            console.log(res)
+        })
+     
+    }
         return (
             <div>
                 <Navbar />
@@ -15,30 +33,53 @@ class PatientRegistrtation extends React.Component {
                     <div className="row">
                         <div className="col-5"></div>
                         <div className="col-7">
-                            <form>
+                            <h2>Welcome to user Page</h2>
+                            <form onSubmit={handleSubmit(patientregister)}>
                                 <div className="form-group">
                                     <label for="userName">
                                         <b>Name</b>
                                     </label>
-                                    <input type="text" name="name" onChange={(e) => { this.setState({ name: e.target.value }); }} className="form-control" id="userName" aria-describedby="emailHelp" placeholder="Enter name"></input>
-                                </div>
-                                <div class="form-group">
-                                    <label for="gender">
-                                        <b>Gender</b>
-                                    </label>
-                                    <select class="form-control" onChange={(e) => this.setState({ gender: e.target.value })} id="gender">
-                                        <option>Please Select</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
+                                    <input type="text" name="name" className="form-control" onChange={(e) => setName(e.target.value)} ref={register({ required: true })} id="userName" aria-describedby="emailHelp" placeholder="Enter name"></input>
+                                    {errors.name && <p style={{ color: "red" }}>Please Enter Your Name</p>}
                                 </div>
                                 <div className="form-group">
-                                    <label for="age">
-                                        <b> Age</b>
+                                    <label for="age1">
+                                        <b>Age</b>
                                     </label>
-                                    <input type="text" onChange={(e) => { this.setState({ age: e.target.value }); }} className="form-control" id="age" placeholder="Enter Age"></input>
+                                    <input type="number" name="age" className="form-control" onChange={(e) => setAge(e.target.value)} ref={register({ required: true })} id="age1" placeholder="Your Age"></input>
+                                    {errors.age && <p style={{ color: "red" }}>Please Enter Your age</p>}
                                 </div>
-                                <button type="button" onClick={(e) => { this.patientsubmit(e); }} className="btn btn-warning">
+                                <div class="form-group">
+                                    <label for="gender1"><b>Gender</b></label>
+                                    <select className="form-control" name="gender" onChange={(e) => setGender(e.target.value)} ref={register({ required: true })} id="gender1">
+                                        <option value="" disabled selected>Please Select</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                        <option value="T">Transgender</option>
+
+                                    </select>
+                                    {errors.gender && <p style={{ color: "red" }}>Please select gender</p>}
+                                </div>
+                                <input type="hidden" name="country" id="countryId" value="IN" />
+                                <div className="form-group">
+                                    <label for="state">
+                                        <b>State</b>
+                                    </label>
+                                    <select name="state" ref={register({ required: true })} onChange={(e) => setState(e.target.value)} className="states order-alpha form-control" id="stateId">
+                                        <option value="" disabled selected>Select State</option>
+                                    </select>
+                                    {errors.state && <p style={{ color: "red" }}>Your State</p>}
+                                </div>
+                                <div className="form-group">
+                                    <label for="city">
+                                        <b>City</b>
+                                    </label>
+                                    <select name="city" ref={register({ required: true })} onChange={(e) => setCity(e.target.value)} className="cities order-alpha limit-pop-70000 form-control" id="cityId">
+                                        <option value="" disabled selected>Select City</option>
+                                    </select>
+                                    {errors.city && <p style={{ color: "red" }}>Your City</p>}
+                                </div>
+                                <button type="submit" className="btn btn-warning">
                                     <b>Submit</b>
                                 </button>
                             </form>
@@ -47,7 +88,7 @@ class PatientRegistrtation extends React.Component {
                 </div>
             </div>
         )
-    }
+    
 }
 
 

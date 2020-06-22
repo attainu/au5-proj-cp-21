@@ -1,4 +1,5 @@
 const express  = require('express')
+var path = require("path")
 const cors = require('cors')
 
 var app = express();
@@ -6,9 +7,7 @@ var app = express();
 // const db = "mongodb://127.0.0.1:27017/medtech"
 
 app.use(express.json());
-
-
-app.use(express.json());
+app.use(cors())
 
 app.use('/',require('./Routes/PatientRoute'))
 app.use('/',require('./Routes/DoctorRoute'))
