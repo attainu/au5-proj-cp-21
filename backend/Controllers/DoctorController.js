@@ -35,7 +35,31 @@ doctorController.register = function (req, res) {
 
 }
 
-// doctorController.login = function(req,res){
+doctorController.login = function(req,res){
+    const { email, password} = req.body
+    console.log(email,password)
+    DoctorSchema.findOne({email : email}).then( user => { 
+        bcrypt.compare(password, user.password, function(err,result){
+            if(result){
+                jwt.sign(
+                    {email : user.email},
+                    "sharma",
+                    { expiresIn : 3600},
+                    (err, token) => {
+                        if(err) throw err;
+                        res.json({
+                            token,
+                            user : {
+                                id : user.id,
+                                email : user.email
+                            }
+                        })
+                    }
+                )
+            }
+        });
+ 
+    })
     
 // }
 doctorController.searchSpeciality= async(req,res)=>{
@@ -49,5 +73,6 @@ doctorController.searchSpeciality= async(req,res)=>{
     catch(err){
         console.log(err)
     }
+}
 }
 module.exports = doctorController
