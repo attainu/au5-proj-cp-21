@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const patientController = {}
 
-patientController.register = function(req,res){
+patientController.register = function (req, res) {
     jwt.verify(req.query.token, "amit", function (err, decode) {
         console.log('decode', decode)
         if (decode) {
@@ -23,7 +23,7 @@ patientController.register = function(req,res){
                             })
                         }
                     })
-                }else{ res.send("user already exists")}
+                } else { res.send("user already exists") }
             })
 
         } else (
@@ -34,7 +34,7 @@ patientController.register = function(req,res){
 
 }
 
-patientController.login = function(req,res){
+patientController.login = function (req, res) {
     res.send("in controller")
 }
 
