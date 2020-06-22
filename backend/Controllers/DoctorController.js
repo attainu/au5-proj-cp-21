@@ -6,7 +6,7 @@ const doctorController = {}
 
 doctorController.register = function (req, res) {
     jwt.verify(req.query.token, "amit", function (err, decode) {
-        console.log('decode', decode)
+        // console.log('decode', decode)
         if (decode) {
             DoctorSchema.findOne({ email: decode.email }).then(user => {
                 if (!user) {
@@ -35,15 +35,15 @@ doctorController.register = function (req, res) {
 
 }
 
-doctorController.login = function(req,res){
+// doctorController.login = function(req,res){
     
-}
-doctorController.searchSpeciality=async(req,res)=>{
+// }
+doctorController.searchSpeciality= async(req,res)=>{
     try{
         let speciality= req.params.search
-        console.log(speciality)
-        let doc = await Doctor.find({});
-        console.log(doc)
+        // console.log(speciality)
+        let doc = await DoctorSchema.find({specialisation:speciality});
+        // console.log(doc)
         res.send(doc);
     }
     catch(err){
