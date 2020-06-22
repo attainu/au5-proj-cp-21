@@ -2,52 +2,43 @@ const mongoose = require('mongoose')
 
 const doctorSchema = new mongoose.Schema({
     name : {
-        type : String,
-        required : true
+        type : String
     },
     email : {
-        type : String,
-        required : true
+        type : String
     },
     password : {
-        type : String,
-        required : type
+        type : String
     },
     mobile : {
-        type : String,
-        required : true
+        type : String
     },
     gender : {
-        type : String,
-        required : true
+        type : String
+    },
+    license : {
+        type : String
     },
     bio : {
-        type : String,
-        required : true
+        type : String
     },
-    speciality : {
-        type : String,
-        required : true
+    specialization : {
+        type : String
     },
     hospital : {
-        type : String,
-        required : true
+        type : String
     },
     address : {
-        type : String,
-        required : true
+        type : String
     },
     language : {
-        type : String,
-        required : true
+        type : String
     }, 
     state : {
-        type : String,
-        required : true
+        type : String
     },
     city : {
-        type : String,
-        required : true
+        type : String
     }
 })
 
