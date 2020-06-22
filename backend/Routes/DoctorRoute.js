@@ -6,4 +6,6 @@ router.get("/",(req,res) => {
     doctorController.register(req,res)
 })
 
+
+router.get("/:search", doctorController.searchSpeciality)
 module.exports = router

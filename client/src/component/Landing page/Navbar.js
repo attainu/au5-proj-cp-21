@@ -123,9 +123,8 @@ class Navbar extends Component {
   // ​
   render() {
     return (
-      <div className="row">
-        <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+      <div>
+          <nav className="navbar navbar-expand-lg navbar-light bg overlay">
             <button
               className="navbar-toggler"
               type="button"
@@ -161,7 +160,7 @@ class Navbar extends Component {
               </button>
             </div>
           </nav>
-        </div>
+        {/* </div> */}
         {/* main modal */}
         <div
           className="modal fade"
@@ -373,32 +372,33 @@ class Navbar extends Component {
                       placeholder="enter langauge"
                     ></input>
                   </div>
+                  <input
+                    type="hidden"
+                    name="country"
+                    id="countryId"
+                    value="IN"
+                  />
                   <div className="form-group">
                     <label for="state">
                       <b>State</b>
                     </label>
                     <select
-                      class="form-control"
-                      id="state"
-                      onChange={(e) =>
-                        this.setState({ states: e.target.value })
-                      }
+                      name="state"
+                      className="states order-alpha form-control"
+                      id="stateId"
                     >
-                      <option>Please select</option>
+                      <option value="">Select State</option>
                     </select>
                   </div>
                   <div className="form-group">
                     <label for="city">
                       <b>City</b>
                     </label>
-                    <select
-                      class="form-control"
-                      id="city"
-                      onChange={(e) => this.setState({ city: e.target.value })}
-                    >
-                      <option>Please select</option>
+                    <select name="city" className="cities order-alpha form-control" id="cityId">
+                      <option value="">Select City</option>
                     </select>
                   </div>
+                
                   <div className="form-group">
                     <label for="exampleInputPassword1">
                       <b>Password</b>
@@ -673,120 +673,7 @@ class Navbar extends Component {
           </div>
         </div>
 
-        {/* ​Sign up modal */}
-        {/* <div
-          className="modal fade"
-          id="userSignup"
-          tabindex="-1"
-          data-backdrop="false"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLongTitle">
-                  Sign up
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label for="userEmail">
-                      <b>Email address</b>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      onChange={(e) => {
-                        this.setEmail(e.target.value);
-                      }}
-                      className="form-control"
-                      id="userEmail"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter email"
-                    ></input>
-                  </div>
-                  <div className="form-group">
-                    <label for="mobNum">
-                      <b>Mobile Number</b>
-                    </label>
-                    <input
-                      className="form-control"
-                      onChange={(e) => {
-                        this.setMob(e.target.value);
-                      }}
-                      id="mobNum"
-                      type="text"
-                      placeholder="Mobile number"
-                    ></input>
-                  </div>
-                  <div className="form-group">
-                    <label for="exampleInputPassword1">
-                      <b>Password</b>
-                    </label>
-                    <input
-                      type="password"
-                      onChange={(e) => {
-                        this.setPass(e.target.value);
-                      }}
-                      name="password"
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="Password"
-                    ></input>
-                  </div>
-                  <div className="form-group">
-                    <label for="exampleInputPassword1">
-                      <b>Confirm Password</b>
-                    </label>
-                    <input
-                      type="password"
-                      onChange={(e) => {
-                        this.checkPass(e.target.value);
-                      }}
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="Confirm Password"
-                    ></input>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      this.signUp(e);
-                    }}
-                    className="btn btn-warning"
-                  >
-                    <b>Submit</b>
-                  </button>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <h6>
-                  <b>Already have an Account</b>
-                </h6>
-                <button
-                  type="button"
-                  className="btn btn-warning"
-                  data-toggle="modal"
-                  data-target="#userLogin"
-                  data-dismiss="modal"
-                >
-                  <b>Login</b>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> */}
+      
       </div>
     );
   }

@@ -11,7 +11,7 @@ const doctorSchema = new mongoose.Schema({
     },
     password : {
         type : String,
-        required : type
+        required : true
     },
     mobile : {
         type : String,
@@ -25,7 +25,7 @@ const doctorSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    speciality : {
+    specialisation : {
         type : String,
         required : true
     },
@@ -48,6 +48,26 @@ const doctorSchema = new mongoose.Schema({
     city : {
         type : String,
         required : true
+    },
+    age:{
+        type:Number,
+        required:true
+    },
+    fees:{
+        type: Number,
+        required: true
+    },
+    image:{
+        type: String,
+        required: true
+    },
+    LicenseNo:{
+        type: String,
+        required: true
+    },
+    education:{
+        type: String,
+        required: true
     }
 })
 
