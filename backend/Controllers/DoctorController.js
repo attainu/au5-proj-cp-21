@@ -36,13 +36,37 @@ doctorController.register = function (req, res) {
 }
 
 doctorController.login = function(req,res){
+    const { email, password} = req.body
+    console.log(email,password)
+    DoctorSchema.findOne({email : email}).then( user => { 
+        bcrypt.compare(password, user.password, function(err,result){
+            if(result){
+                jwt.sign(
+                    {email : user.email},
+                    "sharma",
+                    { expiresIn : 3600},
+                    (err, token) => {
+                        if(err) throw err;
+                        res.json({
+                            token,
+                            user : {
+                                id : user.id,
+                                email : user.email
+                            }
+                        })
+                    }
+                )
+            }
+        });
+ 
+    })
     
 }
 doctorController.searchSpeciality=async(req,res)=>{
     try{
         let speciality= req.params.search
         console.log(speciality)
-        let doc = await Doctor.find({});
+        let doc = await DoctorSchema.find({});
         console.log(doc)
         res.send(doc);
     }

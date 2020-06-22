@@ -28,7 +28,7 @@ function Navbar() {
   const onLogin = (data) => {
     console.log("login",data)
     axios.post("http://localhost:3010/login", data).then(res => {
-      console.log(res.data)
+      localStorage.setItem('myAuth', res.data.token);
     })
     
   }
