@@ -66,5 +66,9 @@
     {
           "speciality": "Urology",
           "image": "https://res.cloudinary.com/dsmr18nsi/image/upload/v1592631760/speciality/Urology_tfhzgm.png"
-    }
+    },
+      {
+            "speciality": "Dental",
+            "image": "https://res.cloudinary.com/dsmr18nsi/image/upload/v1592631759/speciality/pediatric_yhjp1i.png"
+      }
 ]
