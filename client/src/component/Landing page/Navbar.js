@@ -4,11 +4,12 @@ import React, { useRef } from "react";
 // import "../../App.css";
 import axios from "axios";
 import { useForm } from "react-hook-form"
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 
 function Navbar() {
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory()
   const {
     register: register2,
     errors: errors2,
@@ -28,7 +29,13 @@ function Navbar() {
   const onLogin = (data) => {
     console.log("login",data)
     axios.post("http://localhost:3010/login", data).then(res => {
-      localStorage.setItem('myAuth', res.data.token);
+      if(data.userinfo == 'patient'){
+         localStorage.setItem('patientAuth', res.data.token);
+          history.push('/patient')
+      }else{
+      localStorage.setItem('doctorAuth', res.data.token);
+      history.push('/doc')
+      }
     })
     
   }
@@ -55,7 +62,7 @@ function Navbar() {
           </div>
         </nav>
       </div>
-      <div className="modal fade" id="userLogin" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userLogin" data-backdrop="false" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -95,7 +102,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="modal fade" id="userSignup" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userSignup" data-backdrop="false" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">

@@ -35,22 +35,23 @@ const doctorSchema = new mongoose.Schema({
         type : String
     },
     city : {
-        type : String
+        type : String,
     },
     age:{
-        type:Number
+        type:String
     },
     fees:{
-        type: Number
+        type: String
     },
     image:{
-        type: String
-    },
-    LicenseNo:{
-        type: String
-    },
-    education:{
         type: String,
+        default:"https://res.cloudinary.com/dsmr18nsi/image/upload/v1592852682/22_yi2ky2.jpg"
+    },
+    licenseNo:{
+        type: String
+    },
+    qualification:{
+        type: String
     }
 })
 

@@ -7,7 +7,7 @@ const doctorController = {}
 
 doctorController.register = function (req, res) {
     jwt.verify(req.query.token, "amit", function (err, decode) {
-        console.log('decode', decode)
+        // console.log('decode', decode)
         if (decode) {
             DoctorSchema.findOne({ email: decode.email }).then(user => {
                 if (!user) {
@@ -42,7 +42,7 @@ doctorController.login = function(req,res){
         bcrypt.compare(password, user.password, function(err,result){
             if(result){
                 jwt.sign(
-                    {email : user.email},
+                    {id : user._id},
                     "sharma",
                     { expiresIn : 3600},
                     (err, token) => {
@@ -61,18 +61,30 @@ doctorController.login = function(req,res){
  
     })
     
-}
-doctorController.searchSpeciality=async(req,res)=>{
-    try{
-        let speciality= req.params.search
-        console.log(speciality)
-        let doc = await DoctorSchema.find({specialisation : speciality});
-        console.log(doc)
-        res.send(doc);
-    }
-    catch(err){
-        console.log(err)
-    }
+ }
+    
+
+doctorController.addDoctor= async(req,res)=>{
+    const userId = req.user.id
+    const {name, gender, image, license, qualification,bio,specialisation,hospital,address,language,state,city,age,fees}=req.body
+    const doctor = await DoctorSchema.findOne({_id:userId})
+    // console.log(doctor)
+    doctor.name=name
+    doctor.gender=gender
+    doctor.image=image
+    doctor.license=license
+    doctor.qualification = qualification
+    doctor.bio = bio
+    doctor.specialisation = specialisation
+    doctor.hospital = hospital
+    doctor.address = address
+    doctor.language = language
+    doctor.state=state
+    doctor.city=city
+    doctor.fees=fees
+    doctor.age= age
+    doctor.save();
+    // console.log(doctor)
 }
 
 

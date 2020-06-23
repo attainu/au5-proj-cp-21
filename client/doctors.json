@@ -12,11 +12,11 @@
     "language": [
     "English","Hindi"],
     "hospital":"Apollo Hospital chennai",
-    "License No":"8930",
+    "LicenseNo":"8930",
     "address":"sardarpura",
     "city":"channai",
     "state":"Tamilnadu",
-    "education":"MCH (Cardiology Thoracic & Vascular Surgery)",
+    "qualification":"MCH (Cardiology Thoracic & Vascular Surgery)",
     "fees":300
 
   },
@@ -34,11 +34,11 @@
       "English"
     ],
     "hospital": "Narayana hospital",
-    "License No": "8937",
+    "LicenseNo": "8937",
     "address": "Nivran nagar",
     "city": "Jaipur",
     "state": "Rajasthan",
-    "education":"MBBS, DNB (General Surgery), MCH (CVTS)",
+    "qualification":"MBBS, DNB (General Surgery), MCH (CVTS)",
     "fees":300
   },
   {
@@ -55,11 +55,11 @@
       "English"
     ],
     "hospital": "Narayana Multispeciality Hospital",
-    "License No": "17238",
+    "LicenseNo": "17238",
     "address": "Nivran nagar",
     "city": "Jaipur",
     "state": "Rajasthan",
-    "education": "DM (Cardiology)",
+    "qualification": "DM (Cardiology)",
     "fees":250
   },
   {
@@ -76,11 +76,11 @@
       "English"
     ],
     "hospital": "Narayana hospital",
-    "License No": "8937",
+    "LicenseNo": "8937",
     "address": "parvat patiya nagar",
     "city": "Kota",
     "state": "Rajasthan",
-    "education": "MBBS, DNB (General Surgery), MCH (CVTS)",
+    "qualification": "MBBS, DNB (General Surgery), MCH (CVTS)",
     "fees":500
   },
   {
@@ -97,11 +97,11 @@
       "English","Hindi"
     ],
     "hospital": "Dharamshila Narayana Superspeciality Hospital",
-    "License No": "37599",
+    "LicenseNo": "37599",
     "address": "roop nagar",
     "city": "Delhi",
     "state": "Delhi",
-    "education": "MBBS, DNB (General Medicine), DNB",
+    "qualification": "MBBS, DNB (General Medicine), DNB",
     "fees":300
   },
   {
@@ -118,11 +118,11 @@
     "English", "Kannada", "Hindi"
     ],
     "hospital": "Narayana Multispeciality Hospital",
-    "License No": "TMN 2003 0000498 KTK",
+    "LicenseNo": "TMN 2003 0000498 KTK",
     "address": "Manyata nagar",
     "city": "Mysore",
     "state": "Karnataka",
-    "education": "MBBS, MD (PED), DNB",
+    "qualification": "MBBS, MD (PED), DNB",
     "fees":300
   },
  {
@@ -139,11 +139,11 @@
     "English"
   ],
   "hospital": "Narayana Multispeciality Hospital",
-  "License No": "17265",
+  "LicenseNo": "17265",
   "address": "Raja park",
   "city": "Jaipur",
   "state": "Rajasthan",
-  "education": "DM (CARDIOLOGY)",
+  "qualification": "DM (CARDIOLOGY)",
   "fees":250
 },
 {
@@ -160,11 +160,11 @@
     "English"
   ],
   "hospital": "Shri Mata vaishno Devi Narayana Superspeciality Hospital",
-  "License No": "17265",
+  "LicenseNo": "17265",
   "address": "Katra",
   "city": "Katra",
   "state": "Jammu & kashmir ",
-  "education": "MBBS, MD, DNB",
+  "qualification": "MBBS, MD, DNB",
   "fees":400
 },
 {
@@ -181,11 +181,11 @@
     "English"
   ],
   "hospital": "MMI Narayana Superspeciality Hospital",
-  "License No": "17265",
+  "LicenseNo": "17265",
   "address": "lal ganj",
   "city": "Raipur",
   "state": "Chhattisgarh ",
-  "education": "BDS, MDS ",
+  "qualification": "BDS, MDS ",
   "fees":400
 },
 {
@@ -202,11 +202,11 @@
     "English"
   ],
   "hospital": "Goyal Hospital",
-  "License No": "17605",
+  "LicenseNo": "17605",
   "address": "shastri angar",
   "city": "Jodhpur",
   "state": "Rajasthan ",
-  "education": "BDS, MFDS, FFD RCSI, MEDS RCS, MDS ",
+  "qualification": "BDS, MFDS, FFD RCSI, MEDS RCS, MDS ",
   "fees":300
 },
 {
@@ -224,11 +224,11 @@
     "Hindi"
   ],
   "hospital": "Goyal Hospital",
-  "License No": "2848A",
+  "LicenseNo": "2848A",
   "address": "shahibaug",
   "city": "Ahmedabad",
   "state": "Gujarat ",
-  "education": "BDS, MFDS, FFD RCSI, MEDS RCS, MDS ",
+  "qualification": "BDS, MFDS, FFD RCSI, MEDS RCS, MDS ",
   "fees":400
 },
 {
@@ -246,11 +246,11 @@
     "Hindi"
   ],
   "hospital": "Rabindranath Tagore International Institute of Cardiac Sciences",
-  "License No": "47371 WBMC",
+  "LicenseNo": "47371 WBMC",
   "address": "Kolkata",
   "city": "Kolkata",
   "state": "West bengal ",
-  "education": "MD Dermatology",
+  "qualification": "MD Dermatology",
   "fees":400
 },
 {
@@ -268,11 +268,11 @@
     "Hindi"
   ],
   "hospital": "Narayana Multispeciality Hospital",
-  "License No": "12218",
+  "LicenseNo": "12218",
   "address": "bani park",
   "city": "Jaipur",
   "state": "Rajasthan",
-  "education": "D.D.V.L.(Diploma in Der., Ven., Lep.)",
+  "qualification": "D.D.V.L.(Diploma in Der., Ven., Lep.)",
   "fees":300
 },
 {
@@ -289,11 +289,11 @@
     "English"
   ],
   "hospital": "Narayana Superspeciality Hospital",
-  "License No": "38211",
+  "LicenseNo": "38211",
   "address": "sitapura",
   "city": "Jaipur",
   "state": "Rajasthan",
-  "education": "MS",
+  "qualification": "MS",
   "fees":300
 },
 {
@@ -310,11 +310,11 @@
     "English"
   ],
   "hospital": "Mansuriya Superspeciality Hospital",
-  "License No": "DMC 7971",
+  "LicenseNo": "DMC 7971",
   "address": "Gurugram",
   "city": "Gurugram",
   "state": "Delhi",
-  "education": "MBBS, MS",
+  "qualification": "MBBS, MS",
   "fees":200
 },
 {
@@ -331,11 +331,11 @@
     "English"
   ],
   "hospital": "Rabindranath Tagore International Institute of Cardiac Sciences",
-  "License No": "64388",
+  "LicenseNo": "64388",
   "address": "Gurugram",
   "city": "Kolkata",
   "state": "West bengal",
-  "education": "MBBS,MS, DLO, FRCS, FRCS(ENT), EB Facial Plastic Surgery",
+  "qualification": "MBBS,MS, DLO, FRCS, FRCS(ENT), EB Facial Plastic Surgery",
   "fees":500
 },
 {
@@ -352,11 +352,11 @@
     "English"
   ],
   "hospital": "Rabindranath Tagore International Institute of Cardiac Sciences",
-  "License No": "CGMC/7772/17",
+  "LicenseNo": "CGMC/7772/17",
   "address": "Raja park",
   "city": "Jaipur",
   "state": "Rajasthan",
-  "education": "MBBS, MD (Medicine), DM",
+  "qualification": "MBBS, MD (Medicine), DM",
   "fees":600
 },
 
@@ -374,11 +374,11 @@
     "English"
   ],
   "hospital": "Narayana Multispeciality Hospital",
-  "License No": "CGMC/7772/17",
+  "LicenseNo": "CGMC/7772/17",
   "address": "sitapura",
   "city": "Jaipur",
   "state": "Rajasthan",
-  "education": "MD (Internal Medicine)",
+  "qualification": "MD (Internal Medicine)",
   "fees":500
 },
 {
@@ -396,11 +396,11 @@
     "Kannada"
   ],
   "hospital": "Sahyadri Multispeciality Hospital",
-  "License No": "87341",
+  "LicenseNo": "87341",
   "address": "Shimoga",
   "city": "Shimoga",
   "state": "Karnataka",
-  "education": "MBBS, MD (General Medicine)",
+  "qualification": "MBBS, MD (General Medicine)",
   "fees":400
 },
 {
@@ -417,11 +417,11 @@
     "English"
   ],
   "hospital": "Dharamshila Narayana Superspeciality Hospital",
-  "License No": "6080",
+  "LicenseNo": "6080",
   "address": "Delhi",
   "city": "Delhi",
   "state": "Delhi",
-  "education": "MBBS, MS (General Surgery), DNB (General Surgery), DNB",
+  "qualification": "MBBS, MS (General Surgery), DNB (General Surgery), DNB",
   "fees": 600
 }
   ]

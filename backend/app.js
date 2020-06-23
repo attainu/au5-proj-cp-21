@@ -1,4 +1,5 @@
 const express  = require('express')
+var path = require("path")
 const cors = require('cors')
 
 var app = express();
@@ -7,8 +8,6 @@ var app = express();
 
 app.use(express.json());
 app.use(cors())
-
-app.use(express.json());
 
 app.use('/',require('./Routes/PatientRoute'))
 app.use('/',require('./Routes/DoctorRoute'))

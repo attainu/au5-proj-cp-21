@@ -18,6 +18,12 @@ const PatientSchema = new mongoose.Schema({
     },
     gender : {
         type : String
+    },
+    state:{
+        type:String
+    },
+    city:{
+        type:String
     }
 })
 
