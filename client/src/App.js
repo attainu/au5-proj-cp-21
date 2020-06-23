@@ -7,6 +7,7 @@ import './App.css';
 import { BrowserRouter, Route,Switch } from 'react-router-dom';
 import Dashboard from './component/Dashboard';
 import ForgotPassword from './component/Landing page/ForgetPassword';
+import ChangePass from './component/Landing page/ChangePass';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/doc" component={DoctorRegistration} />
           <Route exact path="/patient" component={PatientRegistration} />
           <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route  path="/newpass" component={ChangePass} />
         </Switch>
       </BrowserRouter>
     </div>

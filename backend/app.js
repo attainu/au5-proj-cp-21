@@ -14,6 +14,7 @@ app.use('/',require('./Routes/PatientRoute'))
 app.use('/',require('./Routes/DoctorRoute'))
 app.use('/',require('./Routes/VerifyRoute'))
 app.use('/',require('./Routes/LoginRoute'))
+app.use('/',require('./Routes/NewPassRoute'))
 
 // mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   

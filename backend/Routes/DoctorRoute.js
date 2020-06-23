@@ -7,5 +7,5 @@ router.get('/doc',async (req,res) => {
 })
 
 
-router.get("/:search", doctorController.searchSpeciality)
+//router.get("/:search", doctorController.searchSpeciality)
 module.exports = router
