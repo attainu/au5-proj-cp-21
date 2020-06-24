@@ -79,7 +79,7 @@ patientController.addPatient = async (req, res) => {
 patientController.searchSpeciality=async (req,res)=>{
     try{
         let speciality= req.params.search
-        console.log(speciality)
+         console.log(speciality)
         let doc = await DoctorSchema.find({specialisation:speciality});
         console.log(doc)
         res.send(doc);
