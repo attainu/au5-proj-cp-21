@@ -17,12 +17,12 @@ function App() {
         <Switch>
           {/* <Splash/> */}
           <Route exact path="/" component={Register} />
-          <Protected exact path="/home" component={Dashboard} />
+          <Route exact path="/home" component={Dashboard} />
           <Protected exact path="/doctorprofile/:speciality" component={SearchPage}/>
           <Protected exact path="/doc" component={DoctorRegistration} />
           <Protected exact path="/patient" component={PatientRegistration} />
-          <Protected exact path="/forgotpassword" component={ForgotPassword} />
-          <Protected  path="/newpass" component={ChangePass} />
+          <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route  path="/newpass" component={ChangePass} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -24,6 +24,7 @@ function PatientRegistrtation(){
         });
         request.then(res => {
             console.log(res)
+            
 
         })
      

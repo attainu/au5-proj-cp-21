@@ -8,7 +8,6 @@ import { withRouter, useHistory } from "react-router-dom";
 
 
 function Navbar() {
-  let history =useHistory()
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory()
   const {

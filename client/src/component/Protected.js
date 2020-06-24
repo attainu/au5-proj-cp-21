@@ -5,7 +5,7 @@ const Protected = ({ component: Cmp, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      localStorage.getItem("doctorAuth" ) ||  localStorage.getItem("PatientAuth" )? <Cmp {...props} /> : (<Redirect to="/" />) 
+      localStorage.getItem("PatientAuth")? <Cmp {...props} /> : (<Redirect to="/" />) 
     }
   />
 );
