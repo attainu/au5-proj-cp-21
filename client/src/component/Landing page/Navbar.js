@@ -4,21 +4,25 @@ import React, { useRef } from "react";
 // import "../../App.css";
 import axios from "axios";
 import { useForm } from "react-hook-form"
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 
 function Navbar() {
+  let history =useHistory()
   const { register, handleSubmit, errors } = useForm();
   const {
     register: register2,
     errors: errors2,
     handleSubmit: handleSubmit2
   } = useForm();
-  
+  const logoutUser =()=>{
+    localStorage.removeItem('myAuth')
+  }
   const password = useRef({});
   var userData = null;
   const onSubmit = (data) => {
     axios.post("http://localhost:3010/verify", data).then(res => {
+       
       console.log(res.data)
     })
 
@@ -27,9 +31,8 @@ function Navbar() {
 
   const onLogin = (data) => {
     console.log("login",data)
-    axios.post("http://localhost:3010/login", data).then(res => {
-      localStorage.setItem('myAuth', res.data.token);
-    })
+    
+  
     
   }
   
@@ -45,17 +48,31 @@ function Navbar() {
           <a className="navbar-brand ml-5" href="/userwelcome">LOGO</a>
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-
+          {
+              localStorage.getItem("myAuth") ?
+               <button type="button" className="btn btn-warning mr-3">
+                <b>profile</b>
+              </button>
+              :
             <button type="button" className="btn btn-warning mr-3" data-toggle="modal" data-target="#userLogin">
               <b>Login</b>
             </button>
-            <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
-              <b>Register</b>
-            </button>
+          }
+          {
+            localStorage.getItem("myAuth")?
+                <button type="button" href="/" onClick ={logoutUser} className="btn btn-warning mr-5">
+                  <b>Logout</b>
+                </button>
+                :
+                <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
+                  <b>Register</b>
+                </button>
+          }
+           
           </div>
         </nav>
       </div>
-      <div className="modal fade" id="userLogin" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userLogin" data-backdrop="false" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -95,7 +112,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="modal fade" id="userSignup" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userSignup" data-backdrop="false" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">

@@ -7,7 +7,6 @@ router.get('/doc', doctorController.register)
 
 router.post('/adddoctor',auth,doctorController.addDoctor)
 
-router.get("/:search",auth, doctorController.searchSpeciality)
 
 
 module.exports = router

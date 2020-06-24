@@ -20,7 +20,7 @@ doctorController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.send(user)
+                                res.redirect('http://localhost:3000/')
                             })
                         }
                     })
@@ -62,18 +62,7 @@ doctorController.login = function(req,res){
     })
     
  }
-    doctorController.searchSpeciality=async (req,res)=>{
-    try{
-        let speciality= req.params.search
-        // console.log(speciality)
-        let doc = await DoctorSchema.find({specialisation:speciality});
-        // console.log(doc)
-        res.send(doc);
-    }
-    catch(err){
-        console.log(err)
-    }
-   }
+ 
 
 
 doctorController.addDoctor= async(req,res)=>{

@@ -2,9 +2,9 @@ const PatientSchema = require('../Model/patientSchema');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const patientController = {}
-patientController.register = function(req,res){
+patientController.register = function (req, res) {
     jwt.verify(req.query.token, "amit", function (err, decode) {
-        console.log('decode', decode)
+        // console.log('decode', decode)
         if (decode) {
             PatientSchema.findOne({ email: decode.email }).then(user => {
                 if (!user) {
@@ -18,11 +18,11 @@ patientController.register = function(req,res){
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.send(user)
+                                res.redirect('http://localhost:3000/')
                             })
                         }
                     })
-                }else{ res.send("user already exists")}
+                } else { res.send("user already exists") }
             })
 
         } else (
@@ -33,10 +33,10 @@ patientController.register = function(req,res){
 
 }
 
-patientController.login = function(req,res){
+patientController.login = function (req, res) {
     const { email, password } = req.body
-    console.log(email, password)
-    DoctorSchema.findOne({ email: email }).then(user => {
+    // console.log(email, password)
+    PatientSchema.findOne({ email: email }).then(user => {
         bcrypt.compare(password, user.password, function (err, result) {
             if (result) {
                 jwt.sign(
@@ -60,17 +60,30 @@ patientController.login = function(req,res){
     })
 }
 
-patientController.addPatient = async(req,res)=>{
+patientController.addPatient = async (req, res) => {
     const userId = req.user.userId
-    const { name, gender,  state, city, age } = req.body
-    var patient = await PatientSchema.find({_id:userId})
-    patient.name=name
-    patient.gender=gender
-    patient.state= state
-    patient.city= city
-    patient.age= age
+    const { name, gender, state, city, age } = req.body
+    var patient = await PatientSchema.find({ _id: userId })
+    patient.name = name
+    patient.gender = gender
+    patient.state = state
+    patient.city = city
+    patient.age = age
     patient.save()
 
+}
+
+patientController.searchSpeciality = async (req, res) => {
+    try {
+        let speciality = req.params.search
+        // console.log(speciality)
+        let doc = await PatientSchema.find({ specialisation: speciality });
+        // console.log(doc)
+        res.send(doc);
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 
 module.exports = patientController
