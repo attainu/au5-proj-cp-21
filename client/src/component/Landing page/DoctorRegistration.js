@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
 import axios from 'axios'
+import {withRouter,useHistory} from 'react-router-dom'
 function DoctorRegistration() {
 
     const [name, setName] = useState("")
@@ -21,15 +22,15 @@ function DoctorRegistration() {
     const [city, setCity] = useState("")
     const [fees, setFees] = useState("")
     const [image, setImage] = useState(undefined)
+    const token = localStorage.getItem("doctorAuth");
 
-
+     var history= useHistory()
     const { register, handleSubmit, errors } = useForm();
-
+  
     useEffect(() => {
         Aos.init({ duration: 2000 })
-
     }, [])
-
+    
     const uploadPic = (image) => {
         const data = new FormData()
         data.append("file", image)
@@ -41,13 +42,12 @@ function DoctorRegistration() {
             data: data,
         });
         img.then(res => {
-            console.log(res)
+            // console.log(res)
             setImage(res.data.url)
         })
     }
     const docregister = (data) => {
         // console.log("doc data",data)
-        let token = localStorage.getItem("myAuth");
         const doc = {
             name, age, image, gender, qualification, bio, specialisation, license, hospital, address, language, state, city, fees
         }
@@ -62,6 +62,7 @@ function DoctorRegistration() {
         });
         request.then(res => {
             console.log(res)
+            history.push('/dashboard')
         })
 
 
@@ -216,4 +217,4 @@ function DoctorRegistration() {
 }
 
 
-export default DoctorRegistration
+export default withRouter(DoctorRegistration)

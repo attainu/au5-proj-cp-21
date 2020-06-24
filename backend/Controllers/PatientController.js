@@ -64,24 +64,24 @@ patientController.login = function (req, res) {
 }
 
 patientController.addPatient = async (req, res) => {
-    const userId = req.user.userId
+    const userId = req.user.id
     const { name, gender, state, city, age } = req.body
-    var patient = await PatientSchema.find({ _id: userId })
+    var patient = await PatientSchema.findOne({ _id: userId })
+    // console.log(patient)
     patient.name = name
     patient.gender = gender
     patient.state = state
     patient.city = city
     patient.age = age
     patient.save()
-
+    res.send(patient)
 }
 
 patientController.searchSpeciality=async (req,res)=>{
     try{
         let speciality= req.params.search
-         console.log(speciality)
         let doc = await DoctorSchema.find({specialisation:speciality});
-        console.log(doc)
+        // console.log(doc)
         res.send(doc);
     }
     catch(err){
@@ -89,7 +89,22 @@ patientController.searchSpeciality=async (req,res)=>{
     }
    }
 
+patientController.getUser = async (req,res)=>{
+   const userId = req.user.id
+   let patient = await PatientSchema.findOne({_id:userId})
+//    console.log(patient)
+   res.send(patient)
+}
 
+patientController.getSearchByName = async (req, res) => {
+    var userId=req.user.id
+    var search = req.params.name
+    await DoctorSchema.find({ name: { $regex: search, $options: "i" } }, function (err, docs) {
+        res.send(docs)
+
+    });
+    
+}
 
 // Set new Password for Pateint
 patientController.setpass = function (req, res) {

@@ -11,6 +11,9 @@ import ChangePass from './component/Landing page/ChangePass';
 import DocProtected from './component/DocProtected'
 import PatientProtected from './component/PatProtected'
 import SearchPage from './component/SearchPage'
+import Home from './component/Home'
+import DocProfile from './component/DocProfile';
+
 function App() {
   return (
     <div>
@@ -22,6 +25,8 @@ function App() {
           <PatientProtected exact path="/doctorprofile/:speciality" component={SearchPage}/>
           <DocProtected exact path="/doc" component={DoctorRegistration} />
           <PatientProtected exact path="/patient" component={PatientRegistration} />
+          <Route exact path="/dashboard" component={Home}/>
+          <DocProtected exact path="/profile" component={DocProfile}/>
           <Route exact path="/forgotpassword" component={ForgotPassword} />
           <Route  path="/newpass" component={ChangePass} />
         </Switch>

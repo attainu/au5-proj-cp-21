@@ -16,7 +16,10 @@ function Navbar() {
     handleSubmit: handleSubmit2
   } = useForm();
   const logoutUser =()=>{
-    localStorage.removeItem('myAuth')
+    localStorage.removeItem('patientAuth')
+    localStorage.removeItem('doctorAuth')
+
+
   }
   const password = useRef({});
   var userData = null;
@@ -32,6 +35,7 @@ function Navbar() {
   const onLogin = (data) => {
     console.log("login",data)
     axios.post("http://localhost:3010/login", data).then(res => {
+      // console.log(res)
       if(data.userinfo == 'patient'){
          localStorage.setItem('patientAuth', res.data.token);
           history.push('/patient')
@@ -52,26 +56,34 @@ function Navbar() {
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand ml-5" href="/userwelcome">LOGO</a>
+          <a className="navbar-brand ml-5" href="/home">LOGO</a>
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           {
-              localStorage.getItem("myAuth") ?
-               <button type="button" className="btn btn-warning mr-3">
+              localStorage.getItem("doctorAuth") ?
+               <a href="/profile" className="btn btn-warning mr-3">
                 <b>profile</b>
-              </button>
+                </a>
+                 : localStorage.getItem("patientAuth")
+                 ? <a href="/patient" className="btn btn-warning mr-3">
+                    <b>profile</b>
+                  </a>
+
               :
             <button type="button" className="btn btn-warning mr-3" data-toggle="modal" data-target="#userLogin">
               <b>Login</b>
             </button>
           }
           {
-            localStorage.getItem("myAuth")?
-                <button type="button" href="/" onClick ={logoutUser} className="btn btn-warning mr-5">
+            localStorage.getItem("patientAuth")?
+                <a  href="/" onClick ={logoutUser} className="btn btn-warning mr-5">
                   <b>Logout</b>
-                </button>
-                :
-                <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
+                </a>
+                : localStorage.getItem("doctorAuth")
+                  ? <a  href="/" onClick={logoutUser} className="btn btn-warning mr-5">
+                    <b>Logout</b>
+                  </a>
+                  : <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
                   <b>Register</b>
                 </button>
           }

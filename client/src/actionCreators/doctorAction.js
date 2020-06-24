@@ -3,10 +3,10 @@ export function searchSpeciality(search) {
       console.log(search)
       return function (dispatch) {
             return axios
-                  .get(`http://localhost:3010/${search}`,
+                  .get(`http://localhost:3010/doctor/${search}`,
                    {
                         headers: {
-                              "x-auth-token": window.localStorage.getItem("myAuth"),
+                              "x-auth-token": window.localStorage.getItem("patientAuth"),
                         },
                   }
                   )

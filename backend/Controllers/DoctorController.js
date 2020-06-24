@@ -87,6 +87,30 @@ doctorController.addDoctor= async(req,res)=>{
     // console.log(doctor)
 }
 
+doctorController.getDoctor= async (req,res)=>{
+    const userId = req.user.id
+    let doc = await DoctorSchema.findOne({ _id: userId })
+    //    console.log(patient)
+    res.send(doc)
+}
+
+doctorController.updateprofile = async (req,res)=>{
+    const userId = req.user.id
+    const { name,email, image,bio,hospital, address,  fees } = req.body
+    let doc = await DoctorSchema.findOne({ _id: userId })
+     doc.name=name
+     doc.email=email
+     doc.image=image
+     doc.bio= bio
+     doc.hospital = hospital
+     doc.address = address
+     doc.fees= fees
+     doc.save();
+     res.send(doc)
+    //  console.log(doc)
+}
+
+
 
 //set New Password for Docotr
 doctorController.setpass = function(req,res){
