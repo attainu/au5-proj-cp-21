@@ -10,6 +10,7 @@ function PatientRegistrtation(){
     const [state, setState] = useState("")
     const [city, setCity] = useState("")
     const { register, handleSubmit, errors } = useForm();
+    let history = useHistory()
     const patientregister=(data)=>{
         console.log("patient data", data)
         let token = localStorage.getItem("myAuth");
@@ -24,6 +25,7 @@ function PatientRegistrtation(){
         });
         request.then(res => {
             console.log(res)
+            history.push('/home');
 
         })
      
@@ -94,4 +96,4 @@ function PatientRegistrtation(){
 }
 
 
-export default PatientRegistrtation
+export default withRouter(PatientRegistrtation)
