@@ -13,7 +13,7 @@ function PatientRegistrtation(){
     let history = useHistory()
     const patientregister=(data)=>{
         console.log("patient data", data)
-        let token = localStorage.getItem("myAuth");
+        let token = localStorage.getItem("patientAuth");
         const pat= {name,age,gender,state,city}
         let request = axios({
             method: "POST",

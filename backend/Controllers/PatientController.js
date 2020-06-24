@@ -39,7 +39,7 @@ patientController.register = function (req, res) {
 patientController.login = function(req,res){
     const { email, password } = req.body
     console.log(email, password)
-    DoctorSchema.findOne({ email: email }).then(user => {
+    PatientSchema.findOne({ email: email }).then(user => {
         bcrypt.compare(password, user.password, function (err, result) {
             if (result) {
                 jwt.sign(
@@ -79,17 +79,14 @@ patientController.addPatient = async(req,res)=>{
 patientController.searchSpeciality=async (req,res)=>{
     try{
         let speciality= req.params.search
-         console.log(speciality)
         let doc = await DoctorSchema.find({specialisation:speciality});
-        console.log(doc)
+        console.log("myDOC", doc)
         res.send(doc);
     }
     catch(err){
         console.log(err)
     }
    }
-
-
 
 // Set new Password for Pateint
 patientController.setpass = function (req, res) {

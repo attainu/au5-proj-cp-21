@@ -7,6 +7,7 @@ router.get('/doc', doctorController.register)
 
 router.post('/adddoctor',auth,doctorController.addDoctor)
 
+router.post('/doctor',auth,doctorController.doctor)
 
 
 //router.get("/:search", doctorController.searchSpeciality)

@@ -8,6 +8,6 @@ router.get("/patient",(req,res) => {
 })
 
 router.post("/addpatient",auth,patientController.addPatient)
-router.get("/:search",auth, patientController.searchSpeciality)
+router.get("/doctor/:search",auth, patientController.searchSpeciality)
 
 module.exports = router
