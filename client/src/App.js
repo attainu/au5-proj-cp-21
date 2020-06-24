@@ -7,6 +7,8 @@ import './App.css';
 import { BrowserRouter, Route,Switch } from 'react-router-dom';
 import Dashboard from './component/Dashboard';
 import ForgotPassword from './component/Landing page/ForgetPassword';
+import ChangePass from './component/Landing page/ChangePass';
+import Protected from './component/Protected'
 import SearchPage from './component/SearchPage'
 function App() {
   return (
@@ -15,11 +17,12 @@ function App() {
         <Switch>
           {/* <Splash/> */}
           <Route exact path="/" component={Register} />
-          <Route exact path="/home" component={Dashboard} />
-          <Route exact path="/doctorprofile/:speciality" component={SearchPage}/>
-          <Route exact path="/doc" component={DoctorRegistration} />
-          <Route exact path="/patient" component={PatientRegistration} />
-          <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Protected exact path="/home" component={Dashboard} />
+          <Protected exact path="/doctorprofile/:speciality" component={SearchPage}/>
+          <Protected exact path="/doc" component={DoctorRegistration} />
+          <Protected exact path="/patient" component={PatientRegistration} />
+          <Protected exact path="/forgotpassword" component={ForgotPassword} />
+          <Protected  path="/newpass" component={ChangePass} />
         </Switch>
       </BrowserRouter>
     </div>

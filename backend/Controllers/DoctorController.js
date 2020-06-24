@@ -1,6 +1,7 @@
 const DoctorSchema = require('../Model/doctorSchema')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
+const nodemailer = require('nodemailer')
 const doctorController = {}
 
 
@@ -37,7 +38,6 @@ doctorController.register = function (req, res) {
 
 doctorController.login = function(req,res){
     const { email, password} = req.body
-    console.log(email,password)
     DoctorSchema.findOne({email : email}).then( user => { 
         bcrypt.compare(password, user.password, function(err,result){
             if(result){
@@ -62,8 +62,7 @@ doctorController.login = function(req,res){
     })
     
  }
- 
-
+    
 
 doctorController.addDoctor= async(req,res)=>{
     const userId = req.user.id
@@ -89,4 +88,55 @@ doctorController.addDoctor= async(req,res)=>{
 }
 
 
+//set New Password for Docotr
+doctorController.setpass = function(req,res){
+    const { email, userInfo } = req.body
+    DoctorSchema.findOne({email : email}).then(user =>{
+        let data = {
+            _id : user._id,
+            userInfo : userInfo
+        }
+        jwt.sign(
+            data,
+           "amit",
+           { expiresIn : 600},
+          async (err, token) => {
+               
+               if(err) throw err;
+               console.log("token",token)
+                 //step 1
+       let transpoter = nodemailer.createTransport({
+           host: 'smtp.gmail.com',
+           port: 465,
+           secure: true,
+           auth : {
+             user : "medicalapp331@gmail.com",
+             pass : "rajat@1993"
+           }
+         })
+     
+         //step 2
+         let mailOptions ={
+           from : "medicalapp331@gmail.com",
+           to : email,
+           subject : "Med - Tech ",
+           text: "IT works",
+           html:
+           "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=http://localhost:3010/setpass?token="+token+" target='_blank'>http://localhost:3010/setpass</a>"  
+         }
+     
+       await  transpoter.sendMail(mailOptions, function(err, userData) {
+           if(err){
+             console.log("error occurs",err)
+           }else{
+             console.log("Email sent for set password", userData)
+             res.json(token)
+           }
+         })
+   }
+       )
+   
+    })
+
+}
 module.exports = doctorController

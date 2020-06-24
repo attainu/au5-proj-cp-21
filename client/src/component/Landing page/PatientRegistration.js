@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import Navbar from './Navbar'
 import { useForm } from 'react-hook-form'
+import {withRouter, useHistory} from 'react-router-dom';
 import axios from 'axios'
 function PatientRegistrtation(){
     const [name, setName] = useState("")
@@ -23,6 +24,7 @@ function PatientRegistrtation(){
         });
         request.then(res => {
             console.log(res)
+
         })
      
     }

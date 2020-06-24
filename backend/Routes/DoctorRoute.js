@@ -9,4 +9,5 @@ router.post('/adddoctor',auth,doctorController.addDoctor)
 
 
 
+//router.get("/:search", doctorController.searchSpeciality)
 module.exports = router

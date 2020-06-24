@@ -10,6 +10,7 @@ import { withRouter, useHistory } from "react-router-dom";
 function Navbar() {
   let history =useHistory()
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory()
   const {
     register: register2,
     errors: errors2,
@@ -31,8 +32,15 @@ function Navbar() {
 
   const onLogin = (data) => {
     console.log("login",data)
-    
-  
+    axios.post("http://localhost:3010/login", data).then(res => {
+      if(data.userinfo == 'patient'){
+         localStorage.setItem('patientAuth', res.data.token);
+          history.push('/patient')
+      }else{
+      localStorage.setItem('doctorAuth', res.data.token);
+      history.push('/doc')
+      }
+    })
     
   }
   

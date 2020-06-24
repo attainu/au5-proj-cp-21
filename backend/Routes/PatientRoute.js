@@ -6,8 +6,11 @@ router.get('/patient',(req,res)=>{
       patientController.register(req,res)
 })
 
-// router.post('/login',patientController.login)
+router.get("/patient",(req,res) => {
+    patientController.register(req,res)
+})
+
 router.post("/addpatient",auth,patientController.addPatient)
-router.get("/:search", auth, patientController.searchSpeciality)
+router.get("/:search",auth, patientController.searchSpeciality)
 
 module.exports = router
