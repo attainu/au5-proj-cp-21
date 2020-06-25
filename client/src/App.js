@@ -11,6 +11,8 @@ import ChangePass from './component/Landing page/ChangePass';
 import DocProtected from './component/DocProtected'
 import PatientProtected from './component/PatProtected'
 import SearchPage from './component/SearchPage'
+import BookAppointment from  './component/BookAppointment'
+
 function App() {
   return (
     <div>
@@ -23,6 +25,7 @@ function App() {
           <DocProtected exact path="/doc" component={DoctorRegistration} />
           <PatientProtected exact path="/patient" component={PatientRegistration} />
           <Route exact path="/forgotpassword" component={ForgotPassword} />
+          <Route exact path="/bookappointment" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />
         </Switch>
       </BrowserRouter>

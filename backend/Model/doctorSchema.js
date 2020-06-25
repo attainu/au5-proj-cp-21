@@ -53,42 +53,29 @@ const doctorSchema = new mongoose.Schema({
     qualification: {
         type: String
     },
-    slots: {
-        slot_1: {
-            type: Boolean,
-            default: false
-        },
-        slot_2: {
-            type: Boolean,
-            default: false
-        },
-        slot_3: {
-            type: Boolean,
-            default: false
-        },
-        slot_4: {
-            type: Boolean,
-            default: false
-        },
-        slot_5: {
-            type: Boolean,
-            default: false
-        },
-        slot_6: {
-            type: Boolean,
-            default: false
-        }
-    },
     appointments: [
         {
             date: {
                 type: String
+
             },
-            userData: {
+            slot_1: {
                 type: Object
             },
-            slot: {
-                type: String
+            slot_2: {
+                type: Object
+            },
+            slot_3: {
+                type: Object
+            },
+            slot_4: {
+                type: Object
+            },
+            slot_5: {
+                type: Object
+            },
+            slot_6: {
+                type: Object
             }
         }
     ]

@@ -2,8 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from './Landing page/Navbar'
 import {selectDoctor} from '../actionCreators/doctorAction'
-
+import { bindActionCreators } from "redux";
+import { withRouter} from 'react-router-dom'
+ 
 class SearchPage extends Component {
+      myDoc = (id) =>{
+            this.props.selectDoctor(id)
+            this.props.history.push('/bookappointment')
+            
+      }
       render() {
             // console.log(this.props.doctor.search);'
             return (
@@ -28,7 +35,7 @@ class SearchPage extends Component {
                                                                                     <span className="text-muted">Langauge</span>:{doc.langauge}<br />
                                                                                     <span className="text-muted">Hospital</span>:{doc.hospital}</p>
 
-                                                                              <button className="btn btn-outline-success" style={{ borderRadius: 20 }} value={doc._id} onClick={(e) => {selectDoctor(e.target.value)}}>Book Appointment</button>
+                                                                              <button type="button" className="btn btn-outline-success" style={{ borderRadius: 20 }} value={doc._id} onClick={(e) => { this.myDoc(e.target.value)}}>Book Appointment</button>
 
                                                                         </div>
                                                                   </div>
@@ -53,8 +60,7 @@ class SearchPage extends Component {
 const mapStateToProps = (state) => {
       return state
 }
-// const mapDispatchToProps = (dispatch)=>{
-//       return 
-// }
-
-export default connect(mapStateToProps)(SearchPage)
+const mapDispatchToProps=(dispatch)=>{
+      return bindActionCreators({selectDoctor},dispatch)
+    }
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SearchPage))

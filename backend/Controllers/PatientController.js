@@ -80,7 +80,6 @@ patientController.searchSpeciality=async (req,res)=>{
     try{
         let speciality= req.params.search
         let doc = await DoctorSchema.find({specialisation:speciality});
-        console.log("myDOC", doc)
         res.send(doc);
     }
     catch(err){

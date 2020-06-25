@@ -10,8 +10,8 @@ export function searchSpeciality(search) {
                   }
                   )
                   .then(({ data }) => {
-                        console.log(data);
-                        dispatch({ type: "Search_Speciality", payload: data });
+                       
+                         dispatch({ type: "Search_Speciality", payload: data });
                   })
                   .catch(({ err }) => {
                         console.log(err);
@@ -20,23 +20,21 @@ export function searchSpeciality(search) {
 }
 
 export function selectDoctor (id){
-      console.log("myid", id)
-      return function (dispatch){
+      return function (dispatch) {
             return axios
-                  .post(`http://localhost:3010/doctor`,
+                  .post(`http://localhost:3010/selectdoctor`, {myId : id},
                    {
                         headers: {
                               "x-auth-token": window.localStorage.getItem("patientAuth"),
-                        },
-                        id
+                        }
                   }
                   )
                   .then(({ data }) => {
-                        console.log("data by ID",data);
-                        dispatch({ type: "select_doctor", payload: data });
+                       console.log(data)
+                         dispatch({ type: "select_doctor", payload: data });
                   })
                   .catch(({ err }) => {
                         console.log(err);
                   });
-      }
-}
+      };
+} 

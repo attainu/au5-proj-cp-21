@@ -141,8 +141,9 @@ doctorController.setpass = function(req,res){
 }
 
 doctorController.doctor = function(req,res){
-    const{ id } =req.body;
-    DoctorSchema.findById(id, function(err,resp){
+    console.log("my bodey",req.body)
+    const{ myId } = req.body;
+    DoctorSchema.findById(myId, function(err,resp){
         if(err) console.log('Server Error')
         res.send(resp)
     }) 

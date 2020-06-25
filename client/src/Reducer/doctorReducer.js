@@ -1,5 +1,8 @@
+//import { doctor } from "../../../backend/Controllers/DoctorController";
+
 const intialState = {
-   search:[]
+   search:[],
+   selecteddoctor : {}
 }
 
 export default function (state = intialState, action) {
@@ -8,6 +11,9 @@ export default function (state = intialState, action) {
             case "Search_Speciality":
              stateCopy.search= action.payload
              return stateCopy
+             case "select_doctor":
+                  stateCopy.selecteddoctor= action.payload
+            return stateCopy
             default:
                   return state;
       }
