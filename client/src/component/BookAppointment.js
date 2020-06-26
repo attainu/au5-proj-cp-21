@@ -3,15 +3,33 @@ import { connect } from 'react-redux'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-class BookAppointment extends React.Component{
+
+
+import Paper from '@material-ui/core/Paper';
+import { ViewState } from '@devexpress/dx-react-scheduler';
+import {
+    Scheduler, 
+    DayView,
+    Appointments,
+} from '@devexpress/dx-react-scheduler-material-ui';
+
+const currentDate = new Date();
+const schedulerData = [
+    { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
+    { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
+];
+
+
+class BookAppointment extends React.Component {
     state = {
         date: new Date()
     }
     onChange = date => {
         this.setState({ date })
+
     }
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <div className="container mt-5">
                     <div className="row">
@@ -20,14 +38,28 @@ class BookAppointment extends React.Component{
                             <h3>{this.props.myDoc.name}</h3>
                         </div>
                         <div className="col-6">
-                        <Calendar onChange={this.onChange} value={this.state.date}  locale />
+                          {/*    <Calendar onChange={this.onChange} value={this.state.date} minDate={new Date()} locale />*/}
+                            <Paper>
+                                <Scheduler
+                                    data={schedulerData}
+                                >
+                                    <ViewState
+                                        currentDate={currentDate}
+                                    />
+                                    <DayView
+                                        startDayHour={9}
+                                        endDayHour={14}
+                                    />
+                                    <Appointments />
+                                </Scheduler>
+                            </Paper>
 
 
                         </div>
                         <div className="col-2">
 
                         </div>
-{/*  
+                        {/*  
                         electeddoctor:
 LicenseNo: "8930"
 address: "sardarpura"
@@ -60,9 +92,9 @@ _id: "5ef0d7236b3f7f039c3c9f15"
 
 const mapStateToProps = (state) => {
     console.log(state)
-     return{ 
-         myDoc : state.doctor.selecteddoctor
-     }
+    return {
+        myDoc: state.doctor.selecteddoctor
+    }
 }
 
 export default connect(mapStateToProps)(BookAppointment)

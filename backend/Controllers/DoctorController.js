@@ -84,7 +84,7 @@ doctorController.addDoctor= async(req,res)=>{
     doctor.fees=fees
     doctor.age= age
     doctor.save();
-    // console.log(doctor)
+     console.log("new Registered DOc",doctor)
 }
 
 
