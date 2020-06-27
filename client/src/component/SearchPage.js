@@ -4,7 +4,7 @@ import Navbar from './Landing page/Navbar'
 import {selectDoctor} from '../actionCreators/doctorAction'
 import { bindActionCreators } from "redux";
 import { withRouter} from 'react-router-dom'
- 
+
 class SearchPage extends Component {
       myDoc = (id) =>{
             this.props.selectDoctor(id)

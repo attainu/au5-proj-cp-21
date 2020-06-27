@@ -30,7 +30,6 @@ export function selectDoctor (id){
                   }
                   )
                   .then(({ data }) => {
-                       console.log(data)
                          dispatch({ type: "select_doctor", payload: data });
                   })
                   .catch(({ err }) => {
@@ -38,3 +37,18 @@ export function selectDoctor (id){
                   });
       };
 } 
+
+export function docSlot(data,id){
+      return function(dispatch){
+            return axios.post('http://localhost:3010/docslot',{date : data.toLocaleDateString(),docId : id},
+            {
+                  headers: {
+                        "x-auth-token": window.localStorage.getItem("patientAuth"),
+                  }
+            }).then(({ data }) => {
+                  console.log(data)
+            }).catch(({ err }) => {
+                  console.log(err)
+            })
+      }
+}

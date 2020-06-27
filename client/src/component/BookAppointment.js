@@ -2,22 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
-
-
-import Paper from '@material-ui/core/Paper';
-import { ViewState } from '@devexpress/dx-react-scheduler';
-import {
-    Scheduler, 
-    DayView,
-    Appointments,
-} from '@devexpress/dx-react-scheduler-material-ui';
-
-const currentDate = new Date();
-const schedulerData = [
-    { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
-    { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
-];
+import { bindActionCreators } from "redux";
+import { withRouter} from 'react-router-dom'
+import { docSlot } from '../actionCreators/doctorAction'
 
 
 class BookAppointment extends React.Component {
@@ -25,7 +12,10 @@ class BookAppointment extends React.Component {
         date: new Date()
     }
     onChange = date => {
-        this.setState({ date })
+        this.setState({ date },
+            () =>{
+                this.props.docSlot(this.state.date,this.props.myDoc._id)
+            })
 
     }
     render() {
@@ -38,23 +28,9 @@ class BookAppointment extends React.Component {
                             <h3>{this.props.myDoc.name}</h3>
                         </div>
                         <div className="col-6">
-                          {/*    <Calendar onChange={this.onChange} value={this.state.date} minDate={new Date()} locale />*/}
-                            <Paper>
-                                <Scheduler
-                                    data={schedulerData}
-                                >
-                                    <ViewState
-                                        currentDate={currentDate}
-                                    />
-                                    <DayView
-                                        startDayHour={9}
-                                        endDayHour={14}
-                                    />
-                                    <Appointments />
-                                </Scheduler>
-                            </Paper>
-
-
+                              <Calendar onChange={this.onChange} value={this.state.date} minDate={new Date()}  locale />
+                               
+                              
                         </div>
                         <div className="col-2">
 
@@ -96,5 +72,8 @@ const mapStateToProps = (state) => {
         myDoc: state.doctor.selecteddoctor
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return bindActionCreators({docSlot},dispatch)
+  }
 
-export default connect(mapStateToProps)(BookAppointment)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BookAppointment))

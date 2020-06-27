@@ -145,7 +145,26 @@ doctorController.doctor = function(req,res){
     const{ myId } = req.body;
     DoctorSchema.findById(myId, function(err,resp){
         if(err) console.log('Server Error')
+        console.log("myresppp",resp.appointments)
         res.send(resp)
     }) 
+}
+
+doctorController.appointment = function(req,res){
+    console.log("my request",req.body.date)
+    const { docId, date} = req.body
+    let result = DoctorSchema.findOneAndUpdate(
+        { "_id": docId, "appointments.date": date },
+{ "$push": { "appointments": {"date":date} } },
+
+        function(err,res){
+            if(err) console.log("myerr",err)
+            console.log("m res",res)
+        }
+      );
+
+      console.log("see the result",result)
+      res.send("khdkjf")
+    
 }
 module.exports = doctorController

@@ -8,6 +8,8 @@ router.get('/doc', doctorController.register)
 router.post('/adddoctor',auth,doctorController.addDoctor)
 
 router.post('/selectdoctor',auth,doctorController.doctor)
+
+router.post("/docslot",auth, doctorController.appointment)
 //router.post('/doctor',auth,doctorController.doctor)
 
 

@@ -56,26 +56,33 @@ const doctorSchema = new mongoose.Schema({
     appointments: [
         {
             date: {
-                type: String
+                type: String,
+                defalut: "check"
 
             },
             slot_1: {
-                type: Object
+                type: Boolean,
+                default : false
             },
             slot_2: {
-                type: Object
+                type: Boolean,
+                default : false
             },
             slot_3: {
-                type: Object
+                type: Boolean,
+                default : false
             },
             slot_4: {
-                type: Object
+                type: Boolean,
+                default : false
             },
             slot_5: {
-                type: Object
+                type: Boolean,
+                default : false
             },
             slot_6: {
-                type: Object
+                type: Boolean,
+                default : false
             }
         }
     ]
