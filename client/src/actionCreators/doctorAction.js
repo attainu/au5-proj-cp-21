@@ -1,6 +1,6 @@
 import axios from 'axios'
 export function searchSpeciality(search) {
-      console.log(search)
+      // console.log(search)
       return function (dispatch) {
             return axios
                   .get(`http://localhost:3010/doctor/${search}`,

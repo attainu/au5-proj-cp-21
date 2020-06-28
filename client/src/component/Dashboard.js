@@ -71,7 +71,7 @@ class Dashboard extends Component {
                         </div>
                         <div className="col-md-8">
                           <h5 className="card-title">{doc.name}</h5>
-                          <h6 className="card-subtitle mb-2 text-muted">{doc.education}</h6>
+                          <h6 className="card-subtitle mb-2 text-muted">{doc.qualification}</h6>
                           <p className="card-subtitle">{doc.specialisation}</p>
                           <p className="card-text"><span className="text-muted">License No</span>:{doc.LicenseNo}<br />
                             <span className="text-muted">Langauge</span>:{doc.langauge}<br />
