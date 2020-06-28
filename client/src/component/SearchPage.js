@@ -18,6 +18,8 @@ class SearchPage extends Component {
                         <Navbar />
                         <div className="container-fluid mt-5">
                               <div className="row">
+
+
                                     {
                                           this.props.doctor.search.map((doc, index) => (
                                                 <div className="col-md-4">

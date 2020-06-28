@@ -12,6 +12,8 @@ import DocProtected from './component/DocProtected'
 import PatientProtected from './component/PatProtected'
 import SearchPage from './component/SearchPage'
 import BookAppointment from  './component/BookAppointment'
+import Home from './component/Home'
+import DocProfile from './component/DocProfile';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <PatientProtected exact path="/doctorprofile/:speciality" component={SearchPage}/>
           <DocProtected exact path="/doc" component={DoctorRegistration} />
           <PatientProtected exact path="/patient" component={PatientRegistration} />
+          <Route exact path="/dashboard" component={Home}/>
+          <DocProtected exact path="/profile" component={DocProfile}/>
           <Route exact path="/forgotpassword" component={ForgotPassword} />
           <Route exact path="/bookappointment" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />

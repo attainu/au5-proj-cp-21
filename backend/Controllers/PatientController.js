@@ -21,7 +21,7 @@ patientController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.send(user)
+                                res.redirect('http://localhost:3000/')
                             })
                         }
                     })
@@ -36,9 +36,9 @@ patientController.register = function (req, res) {
 
 }
 
-patientController.login = function(req,res){
+patientController.login = function (req, res) {
     const { email, password } = req.body
-    console.log(email, password)
+    // console.log(email, password)
     PatientSchema.findOne({ email: email }).then(user => {
         bcrypt.compare(password, user.password, function (err, result) {
             if (result) {
@@ -63,17 +63,18 @@ patientController.login = function(req,res){
     })
 }
 
-patientController.addPatient = async(req,res)=>{
-    const userId = req.user.userId
-    const { name, gender,  state, city, age } = req.body
-    var patient = await PatientSchema.find({_id:userId})
-    patient.name=name
-    patient.gender=gender
-    patient.state= state
-    patient.city= city
-    patient.age= age
+patientController.addPatient = async (req, res) => {
+    const userId = req.user.id
+    const { name, gender, state, city, age } = req.body
+    var patient = await PatientSchema.findOne({ _id: userId })
+    // console.log(patient)
+    patient.name = name
+    patient.gender = gender
+    patient.state = state
+    patient.city = city
+    patient.age = age
     patient.save()
-
+    res.send(patient)
 }
 
 patientController.searchSpeciality=async (req,res)=>{
@@ -86,6 +87,23 @@ patientController.searchSpeciality=async (req,res)=>{
         console.log(err)
     }
    }
+
+patientController.getUser = async (req,res)=>{
+   const userId = req.user.id
+   let patient = await PatientSchema.findOne({_id:userId})
+//    console.log(patient)
+   res.send(patient)
+}
+
+patientController.getSearchByName = async (req, res) => {
+    var userId=req.user.id
+    var search = req.params.name
+    await DoctorSchema.find({ name: { $regex: search, $options: "i" } }, function (err, docs) {
+        res.send(docs)
+
+    });
+    
+}
 
 // Set new Password for Pateint
 patientController.setpass = function (req, res) {

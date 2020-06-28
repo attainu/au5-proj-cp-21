@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
 import axios from 'axios'
+import {withRouter,useHistory} from 'react-router-dom'
 function DoctorRegistration() {
 
     const [name, setName] = useState("")
@@ -21,15 +22,27 @@ function DoctorRegistration() {
     const [city, setCity] = useState("")
     const [fees, setFees] = useState("")
     const [image, setImage] = useState(undefined)
+    const token = localStorage.getItem("doctorAuth");
 
-
+     var history= useHistory()
     const { register, handleSubmit, errors } = useForm();
-
+  
     useEffect(() => {
         Aos.init({ duration: 2000 })
-
+        getStateCity()
     }, [])
+    const getStateCity=()=>{
+        let request = axios({
+            method: "GET",
+            url: "https://freegeoip.app/json/"
+        });
+        request.then(res => {
+            console.log(res.data.state)
+            setState(res.data.state)
+            setCity(res.data.city)
+        })
 
+    }
     const uploadPic = (image) => {
         const data = new FormData()
         data.append("file", image)
@@ -41,13 +54,12 @@ function DoctorRegistration() {
             data: data,
         });
         img.then(res => {
-            console.log(res)
+            // console.log(res)
             setImage(res.data.url)
         })
     }
     const docregister = (data) => {
         // console.log("doc data",data)
-        let token = localStorage.getItem("myAuth");
         const doc = {
             name, age, image, gender, qualification, bio, specialisation, license, hospital, address, language, state, city, fees
         }
@@ -62,6 +74,7 @@ function DoctorRegistration() {
         });
         request.then(res => {
             console.log(res)
+            history.push('/dashboard')
         })
 
 
@@ -177,7 +190,7 @@ function DoctorRegistration() {
                                 <label for="state">
                                     <b>State</b>
                                 </label>
-                                <select name="state" ref={register({ required: true })} onChange={(e) => setState(e.target.value)} className="states order-alpha form-control" id="stateId">
+                                <select name="state" ref={register({ required: true })} value={state} onChange={(e) => setState(e.target.value)} className="states order-alpha form-control" id="stateId">
                                     <option value="" disabled selected>Select State</option>
                                 </select>
                                 {errors.state && <p style={{ color: "red" }}>Your State</p>}
@@ -186,7 +199,7 @@ function DoctorRegistration() {
                                 <label for="city">
                                     <b>City</b>
                                 </label>
-                                <select name="city" ref={register({ required: true })} onChange={(e) => setCity(e.target.value)} className="cities order-alpha limit-pop-70000 form-control" id="cityId">
+                                <select name="city" ref={register({ required: true })} value={city} onChange={(e) => setCity(e.target.value)} className="cities order-alpha limit-pop-70000 form-control" id="cityId">
                                     <option value="" disabled selected>Select City</option>
                                 </select>
                                 {errors.city && <p style={{ color: "red" }}>Your City</p>}
@@ -216,4 +229,4 @@ function DoctorRegistration() {
 }
 
 
-export default DoctorRegistration
+export default withRouter(DoctorRegistration)

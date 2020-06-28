@@ -15,11 +15,17 @@ function Navbar() {
     errors: errors2,
     handleSubmit: handleSubmit2
   } = useForm();
-  
+  const logoutUser =()=>{
+    localStorage.removeItem('patientAuth')
+    localStorage.removeItem('doctorAuth')
+
+
+  }
   const password = useRef({});
   var userData = null;
   const onSubmit = (data) => {
     axios.post("http://localhost:3010/verify", data).then(res => {
+       
       console.log(res.data)
     })
 
@@ -29,6 +35,7 @@ function Navbar() {
   const onLogin = (data) => {
     console.log("login",data)
     axios.post("http://localhost:3010/login", data).then(res => {
+      // console.log(res)
       if(data.userinfo == 'patient'){
          localStorage.setItem('patientAuth', res.data.token);
           history.push('/patient')
@@ -42,23 +49,45 @@ function Navbar() {
   
   
   return (
-    <div className="row">
+    <div className="row shadow">
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+        <nav className="navbar navbar-expand-lg navbar-light bg-transparent ">
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand ml-5" href="/userwelcome">LOGO</a>
+          <a className="navbar-brand ml-5" href="/home">LOGO</a>
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+          {
+              localStorage.getItem("doctorAuth") ?
+               <a href="/profile" className="btn btn-warning mr-3">
+                <b>profile</b>
+                </a>
+                 : localStorage.getItem("patientAuth")
+                 ? <a href="/patient" className="btn btn-warning mr-3">
+                    <b>profile</b>
+                  </a>
 
+              :
             <button type="button" className="btn btn-warning mr-3" data-toggle="modal" data-target="#userLogin">
               <b>Login</b>
             </button>
-            <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
-              <b>Register</b>
-            </button>
+          }
+          {
+            localStorage.getItem("patientAuth")?
+                <a  href="/" onClick ={logoutUser} className="btn btn-warning mr-5">
+                  <b>Logout</b>
+                </a>
+                : localStorage.getItem("doctorAuth")
+                  ? <a  href="/" onClick={logoutUser} className="btn btn-warning mr-5">
+                    <b>Logout</b>
+                  </a>
+                  : <button type="button" className="btn btn-warning mr-5" data-toggle="modal" data-target="#userSignup">
+                  <b>Register</b>
+                </button>
+          }
+           
           </div>
         </nav>
       </div>

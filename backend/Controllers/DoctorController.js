@@ -22,7 +22,7 @@ doctorController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.send(user)
+                                res.redirect('http://localhost:3000/')
                             })
                         }
                     })
@@ -87,6 +87,30 @@ doctorController.addDoctor= async(req,res)=>{
     doctor.save();
      console.log("new Registered DOc",doctor)
 }
+
+doctorController.getDoctor= async (req,res)=>{
+    const userId = req.user.id
+    let doc = await DoctorSchema.findOne({ _id: userId })
+    //    console.log(patient)
+    res.send(doc)
+}
+
+doctorController.updateprofile = async (req,res)=>{
+    const userId = req.user.id
+    const { name,email, image,bio,hospital, address,  fees } = req.body
+    let doc = await DoctorSchema.findOne({ _id: userId })
+     doc.name=name
+     doc.email=email
+     doc.image=image
+     doc.bio= bio
+     doc.hospital = hospital
+     doc.address = address
+     doc.fees= fees
+     doc.save();
+     res.send(doc)
+    //  console.log(doc)
+}
+
 
 
 //set New Password for Docotr
