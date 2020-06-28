@@ -2,7 +2,8 @@
 
 const intialState = {
    search:[],
-   selecteddoctor : {}
+   selecteddoctor : {},
+   docSlot: {}
 }
 
 export default function (state = intialState, action) {
@@ -13,6 +14,9 @@ export default function (state = intialState, action) {
              return stateCopy
              case "select_doctor":
                   stateCopy.selecteddoctor= action.payload
+            return stateCopy
+            case "slots":
+                  stateCopy.docSlot = action.payload
             return stateCopy
             default:
                   return state;

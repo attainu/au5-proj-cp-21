@@ -52,40 +52,7 @@ const doctorSchema = new mongoose.Schema({
     },
     qualification: {
         type: String
-    },
-    appointments: [
-        {
-            date: {
-                type: String,
-                defalut: "check"
-
-            },
-            slot_1: {
-                type: Boolean,
-                default : false
-            },
-            slot_2: {
-                type: Boolean,
-                default : false
-            },
-            slot_3: {
-                type: Boolean,
-                default : false
-            },
-            slot_4: {
-                type: Boolean,
-                default : false
-            },
-            slot_5: {
-                type: Boolean,
-                default : false
-            },
-            slot_6: {
-                type: Boolean,
-                default : false
-            }
-        }
-    ]
+    }
 })
 
 const Doctor = mongoose.model('doctor', doctorSchema)
