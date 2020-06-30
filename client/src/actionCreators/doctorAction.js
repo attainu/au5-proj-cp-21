@@ -137,6 +137,29 @@ export function bookSlot(data, id, slot) {
                               console.log(err)
                         })
                   break;
+            default:
+                        
 
       }
+}
+
+export function getDoctorById(id){
+
+      return function (dispatch) {
+            return axios
+                  .get(`http://localhost:3010/doctor/getbyid/${id}`,
+                        {
+                              headers: {
+                                    "x-auth-token": window.localStorage.getItem("patientAuth"),
+                              },
+                        }
+                  )
+                  .then(({ data }) => {
+                        // console.log(data)
+                        dispatch({ type: "GET_DOCTOR_BY_ID", payload: data });
+                  })
+                  .catch(({ err }) => {
+                        console.log(err);
+                  });
+      };
 }

@@ -8,7 +8,7 @@ import { withRouter} from 'react-router-dom'
 class SearchPage extends Component {
       myDoc = (id) =>{
             this.props.selectDoctor(id)
-            this.props.history.push('/bookappointment')
+            this.props.history.push(`/bookappointment/${id}`)
             
       }
       render() {

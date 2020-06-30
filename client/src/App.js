@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/dashboard" component={Home}/>
           <DocProtected exact path="/profile" component={DocProfile}/>
           <Route exact path="/forgotpassword" component={ForgotPassword} />
-          <Route exact path="/bookappointment" component={BookAppointment} />
+          <Route exact path="/bookappointment/:id" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />
         </Switch>
       </BrowserRouter>

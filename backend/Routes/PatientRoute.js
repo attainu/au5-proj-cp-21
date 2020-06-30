@@ -16,6 +16,6 @@ router.post("/addpatient", auth,patientController.addPatient)
 router.get("/doctor/:search", auth, patientController.searchSpeciality)
 router.get('/getuser',auth,patientController.getUser)
 router.get('/doctorname/:name', auth, patientController.getSearchByName)
-
+router.get('/doctor/getbyid/:id',auth,patientController.getDocById)
 
 module.exports = router

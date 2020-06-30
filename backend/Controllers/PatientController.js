@@ -158,4 +158,13 @@ patientController.setpass = function (req, res) {
 
 }
 
+
+patientController.getDocById = async(req,res)=>{
+    var userId = req.user.id
+    var id = req.params.id
+    let doc = await DoctorSchema.findOne({ _id: id })
+    // console.log(doc)
+    res.send(doc)
+
+}
 module.exports = patientController
