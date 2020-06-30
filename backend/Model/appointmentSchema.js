@@ -8,28 +8,148 @@ const appointmentSchema = new mongoose.Schema({
         type: String
     },
     slot_1: {
-        type: String,
-        default : false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     },
     slot_2: {
-        type: String,
-        default : false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     },
     slot_3: {
-        type: String,
-        default:  false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     },
     slot_4: {
-        type: String,
-        default : false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     },
     slot_5: {
-        type: String,
-        default : false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     },
     slot_6: {
-        type: String,
-        default : false
+        status : {
+            type : String,
+            default : false
+        },
+        name : {
+            type : String
+        },
+        email : {
+            type :String
+        },
+        mobile : {
+            type : String
+        },
+        gender : {
+            type : String
+        },
+        state : {
+            type : String
+        },
+        city : {
+            type : String
+        }
     }
 })
 

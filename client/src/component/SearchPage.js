@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from './Landing page/Navbar'
-import {selectDoctor} from '../actionCreators/doctorAction'
-import { bindActionCreators } from "redux";
+// import {selectDoctor} from '../actionCreators/doctorAction'
+// import { bindActionCreators } from "redux";
 import { withRouter} from 'react-router-dom'
 
 class SearchPage extends Component {
       myDoc = (id) =>{
-            this.props.selectDoctor(id)
-            this.props.history.push('/bookappointment')
+            //this.props.selectDoctor(id)
+            this.props.history.push('/bookappointment/'+id)
             
       }
       render() {
@@ -62,7 +62,7 @@ class SearchPage extends Component {
 const mapStateToProps = (state) => {
       return state
 }
-const mapDispatchToProps=(dispatch)=>{
-      return bindActionCreators({selectDoctor},dispatch)
-    }
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SearchPage))
+// const mapDispatchToProps=(dispatch)=>{
+//       return bindActionCreators({selectDoctor},dispatch)
+//     }
+export default connect(mapStateToProps)(withRouter(SearchPage))
