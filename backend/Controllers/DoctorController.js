@@ -180,13 +180,12 @@ doctorController.appointment = function(req,res){
         res.send(data)
     })
 }
-
-doctorController.bookslot = function(req,res){
-    const { date, docId } = req.body
-    //console.log("hkj", req.user.id)
+  
+doctorController.bookslot = async function(req,res){
+    const { date, docId, name, email, mobile, gender, age, state, city } = req.body
+    
     if(req.body.slot_1){
-        req.body.slot_1 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_1 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -197,10 +196,9 @@ doctorController.bookslot = function(req,res){
             }
         )
 
-    }
+     }
     if(req.body.slot_2){
-        req.body.slot_2 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_2 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -213,8 +211,7 @@ doctorController.bookslot = function(req,res){
 
     }
     if(req.body.slot_3){
-        req.body.slot_3 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_3 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -227,8 +224,7 @@ doctorController.bookslot = function(req,res){
         
     }
     if(req.body.slot_4){
-        req.body.slot_4 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_4 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -241,8 +237,7 @@ doctorController.bookslot = function(req,res){
         
     }
     if(req.body.slot_5){
-        req.body.slot_5 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_5 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -255,8 +250,7 @@ doctorController.bookslot = function(req,res){
         
     }
     if(req.body.slot_6){
-        req.body.slot_6 = req.user.id
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },req.body,
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_6 : {status : true, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -268,7 +262,18 @@ doctorController.bookslot = function(req,res){
         )
         
     }
-   
-   
+}
+
+doctorController.booking = function(req,res){
+    req.body.docId = req.user.id
+    AppointmentSchema.findOne(req.body,
+        (err, doc) =>{
+            if (err) {
+                console.log("hello arr", err)
+                res.send(null)
+            }
+            res.send(doc)
+        }
+    )
 }
 module.exports = doctorController

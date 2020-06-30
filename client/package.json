@@ -20,6 +20,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-calendar": "^3.1.0",
+    "react-clock": "^2.4.0",
     "react-day-picker": "^7.4.8",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
@@ -30,7 +31,10 @@
     "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "slick-carousel": "^1.8.1"
+    "simple-peer": "^9.7.2",
+    "slick-carousel": "^1.8.1",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

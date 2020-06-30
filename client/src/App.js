@@ -14,7 +14,8 @@ import SearchPage from './component/SearchPage'
 import BookAppointment from  './component/BookAppointment'
 import Home from './component/Home'
 import DocProfile from './component/DocProfile';
-
+import DocBooking from './component/DocBooking';
+import VideoCall from './component/VideoCall'
 function App() {
   return (
     <div>
@@ -28,9 +29,11 @@ function App() {
           <PatientProtected exact path="/patient" component={PatientRegistration} />
           <Route exact path="/dashboard" component={Home}/>
           <DocProtected exact path="/profile" component={DocProfile}/>
+          <DocProtected exact path="/docbooking" component={DocBooking}/>
           <Route exact path="/forgotpassword" component={ForgotPassword} />
-          <Route exact path="/bookappointment/:id" component={BookAppointment} />
+          <Route  path="/bookappointment" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />
+          <Route path='/videocall/asd' component={VideoCall} />
         </Switch>
       </BrowserRouter>
     </div>
