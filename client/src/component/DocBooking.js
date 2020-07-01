@@ -6,11 +6,14 @@ import Clock from 'react-clock';
 import 'react-calendar/dist/Calendar.css';
 import { bindActionCreators } from "redux";
 import { docBooking } from '../actionCreators/doctorAction'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 class DocBooking extends React.Component {
     constructor(props) {
         super(props)
+        this.state={
+            id:""
+        }
         let date = new Date()
         this.props.docBooking(date)
     }
@@ -24,7 +27,7 @@ class DocBooking extends React.Component {
     }
 
     buttonSlot = {
-        slot_1: {startHour : 18, endHour: 10, startMin: 0, endMin: 55},
+        slot_1: {startHour : 18, endHour: 10, startMin: 0, endMin: 59},
         slot_2: {startHour : 11, endHour: 11, startMin: 0, endMin: 30},
         slot_3: {startHour : 12, endHour: 12, startMin: 0, endMin: 30},
         slot_4: {startHour : 16, endHour: 16, startMin: 0, endMin: 30},
@@ -42,12 +45,20 @@ class DocBooking extends React.Component {
           () => this.setState({ date: new Date() }),
           1000
         );
+          const token = localStorage.getItem("doctorAuth")
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          this.setState({
+              id:payload.id
+          })
       }
       onChange = dateCal => {
         this.setState({ dateCal })
            
     }
+    
     render() {
+        // console.log(this.props)
+        
         return (
             <div>
                 <Navbar />
@@ -71,6 +82,7 @@ class DocBooking extends React.Component {
 
                     
                         <div className="col-7">
+                            
                             {
                                 Object.entries(this.props.myBooking).map(([key, value], index) => {
                                     if (value.status === "true") {
@@ -84,8 +96,14 @@ class DocBooking extends React.Component {
                                                     <p className="card-text"><b>Gender: </b> {value.gender} <b>Age: </b> {value.age}</p>
                                                     <p className="card-text"><b>Contact Details: </b> {value.email} <b>Mob: </b>{value.mobile}</p>
                                                     <p class="card-text"><b>City: </b> {value.city} <b>State: </b> {value.state}</p>
-                                                    <p>{(this.buttonSlot[key].startHour === this.state.date.getHours() && this.buttonSlot[key].startMin <= this.state.date.getMinutes() && this.buttonSlot[key].endMin >= this.state.date.getMinutes()) ? <a href="/videocall/asd" target="_blank" className="btn btn-warning btn-lg active"  aria-pressed="true"><b>Join</b></a> : <a href="#" className="btn btn-outline-danger btn-lg disabled"  aria-pressed="true"><b>Join</b></a> }</p>
+                                                    {/* <p>{(this.buttonSlot[key].startHour === this.state.date.getHours() && 
+                                                        this.buttonSlot[key].startMin <= this.state.date.getMinutes() && 
+                                                        this.buttonSlot[key].endMin >= this.state.date.getMinutes()) ? 
+                                                        <Link to={`/videocall/${this.state.id}`} target="_blank" className="btn btn-warning btn-lg active"  aria-pressed="true"><b>Join</b></Link> :
+                                                         <Link to="#" className="btn btn-outline-danger btn-lg disabled"  aria-pressed="true"><b>Join</b></Link> }</p> */}
+                                                    <Link to={`/videocall/${this.state.id}`} target="_blank" className="btn btn-warning btn-lg active" aria-pressed="true"><b>Join</b></Link>
                                                 </div>
+
                                             </div>
 
 

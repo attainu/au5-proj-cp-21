@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form"
 import { withRouter, useHistory } from "react-router-dom";
+import ParticlesBg from "particles-bg";
 
 
 function Navbar() {
@@ -52,6 +53,7 @@ function Navbar() {
     <div className="row shadow">
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-transparent ">
+          <ParticlesBg type="circle" bg={true} />
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -103,6 +105,7 @@ function Navbar() {
             </div>
             <div className="modal-body">
               <form onSubmit={handleSubmit2(onLogin)}>
+
               <div className="form-group">
                   <label className="d-block"><b>As a</b></label>
                   <input type="radio"  className="userInfo" name="userinfo" value="doc" ref={register2({required : true})}></input><b>  Doctor</b>

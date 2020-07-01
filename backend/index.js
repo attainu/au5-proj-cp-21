@@ -19,6 +19,11 @@ const users = {};
 //     });
 // }
 io.on('connection', socket => {
+    // console.log(socket)
+    socket.on('storeClientInfo', (data) => {
+        console.log("connected custom id:", data.userId);
+        socket.id = data.userId;
+    });
     var x = socket.id
     if (!users[x]) {
         users[x] = x;

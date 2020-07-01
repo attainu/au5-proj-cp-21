@@ -33,7 +33,7 @@ function App() {
           <Route exact path="/forgotpassword" component={ForgotPassword} />
           <Route  path="/bookappointment" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />
-          <Route path='/videocall/asd' component={VideoCall} />
+          <Route path='/videocall/:id' component={VideoCall} />
         </Switch>
       </BrowserRouter>
     </div>

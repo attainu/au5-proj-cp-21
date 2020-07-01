@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import SliderComponent from './slider'
 import Parallax from './Parallax'
+
 class Register extends Component {
       render() {
             
@@ -10,6 +11,7 @@ class Register extends Component {
                   <div>
                         <Navbar/>
                         <br/>
+
                         <br/>
                         <Parallax/>
                         

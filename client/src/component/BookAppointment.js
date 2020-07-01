@@ -5,8 +5,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { bindActionCreators } from "redux";
 import { withRouter } from 'react-router-dom'
-import { docSlot, bookSlot } from '../actionCreators/doctorAction'
-
+import { docSlot, bookSlot,selectDoctor } from '../actionCreators/doctorAction'
+import axios from 'axios'
 
 class BookAppointment extends React.Component {
    constructor(props){
@@ -83,7 +83,7 @@ class BookAppointment extends React.Component {
 
                         </div>
                         <div className="col-md-8">
-                            <h5>{this.props.myDoc.name}</h5>
+                            <h5>{this.state.name}</h5>
                             <span>{this.props.myDoc.qualification}</span><br/>
                             <span>{this.props.myDoc.specialisation}</span><br />
                             <span>{this.props.myDoc.city}</span><br />
@@ -172,7 +172,7 @@ _id: "5ef0d7236b3f7f039c3c9f15"
 }
 
 const mapStateToProps = (state) => {
-    console.log("asdfhh", state.doctor.docSlot)
+    console.log("asdfhh", state.doctor.myDoc)
     return {
         myDoc: state.doctor.selecteddoctor,
         slot: state.doctor.docSlot

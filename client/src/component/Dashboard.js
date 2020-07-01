@@ -6,6 +6,10 @@ import { searchSpeciality} from '../actionCreators/doctorAction'
 import {connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import axios from "axios"
+
+
+
+
 class Dashboard extends Component {
   state={
     doctors:[],

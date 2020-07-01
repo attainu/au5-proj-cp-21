@@ -39,6 +39,7 @@ doctorController.register = function (req, res) {
 
 doctorController.login = function(req,res){
     const { email, password} = req.body
+    // console.log(req.body)
     DoctorSchema.findOne({email : email}).then( user => { 
         bcrypt.compare(password, user.password, function(err,result){
             if(result){
@@ -116,7 +117,9 @@ doctorController.updateprofile = async (req,res)=>{
 //set New Password for Docotr
 doctorController.setpass = function(req,res){
     const { email, userInfo } = req.body
+    // console.log(req.body)
     DoctorSchema.findOne({email : email}).then(user =>{
+        // console.log(user)
         let data = {
             _id : user._id,
             userInfo : userInfo

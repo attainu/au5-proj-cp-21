@@ -14,11 +14,12 @@ import styled from "styled-components";
 //   width: 100%;
 // `;
 const Video = styled.video`
-  // border: 1px solid blue;
-  // width: 70%;
-  // height: 70%;
+// border: 1px solid blue;
+// width: 70%;
+// height: 70%;
 `;
-function VideoCall() {
+function VideoCall(props) {
+  // console.log(props)
   const [yourID, setYourID] = useState("");
   const [users, setUsers] = useState({});
   const [stream, setStream] = useState();
@@ -37,8 +38,12 @@ function VideoCall() {
         userVideo.current.srcObject = stream;
       }
     })
+    
+    // var Id = match.params.id
+    // socket.current.emit("userId",Id)
     socket.current.on("yourID", (id) => {
-      // console.log(id)
+      let userId = props.match.params.id;
+      socket.current.emit('storeClientInfo', { userId: userId });
       setYourID(id);
     })
     socket.current.on("allUsers", (users) => {
@@ -177,7 +182,7 @@ function VideoCall() {
         </div>
       }
       <div>
-        {incomingCall}
+        {!callAccepted && incomingCall}
       </div>
     </div>
   );
