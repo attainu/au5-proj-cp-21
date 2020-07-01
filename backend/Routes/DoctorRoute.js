@@ -17,5 +17,5 @@ router.post("/bookslot",auth, doctorController.bookslot)
 router.get('/getdoctor', auth, doctorController.getDoctor)
 
 router.post("/booking",auth,doctorController.booking)
-
+ 
 module.exports = router

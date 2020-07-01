@@ -3,10 +3,8 @@ const PORT = 3010;
 const http = require('http');
 const app = require('./app')
 const server = http.createServer(app)
-
 const socket = require("socket.io");
 const io = socket(server);
-
 var db = require('./db')
 
 
@@ -18,6 +16,8 @@ const users = {};
 //         return v.toString(16);
 //     });
 // }
+
+
 io.on('connection', socket => {
     // console.log(socket)
     socket.on('storeClientInfo', (data) => {
