@@ -174,18 +174,18 @@ doctorController.doctor = function(req,res){
 }
 
 doctorController.appointment = function(req,res){
-    const { date, docId} = req.body
+    var { date, docId} = req.body
     AppointmentSchema.find({ date : date, docId : docId }, (err,data) => {
         if(err) console.log("let Err", err)
         res.send(data)
     })
 }
-  
+   
 doctorController.bookslot = async function(req,res){
-    const { date, docId, name, email, mobile, gender, age, state, city } = req.body
-    
+    const { date, patientId, docId, name, email, mobile, gender, age, state, city  } = req.body
     if(req.body.slot_1){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_1 : {status : true, name, email, mobile, gender, age, state, city }},
+        console.log("DoctorController 188", patientId, age)
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_1 : {status : true, patientId, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -198,7 +198,7 @@ doctorController.bookslot = async function(req,res){
 
      }
     if(req.body.slot_2){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_2 : {status : true, name, email, mobile, gender, age, state, city }},
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_2 : {status : true, patientId, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -211,7 +211,7 @@ doctorController.bookslot = async function(req,res){
 
     }
     if(req.body.slot_3){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_3 : {status : true, name, email, mobile, gender, age, state, city }},
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_3 : {status : true, patientId, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -224,7 +224,7 @@ doctorController.bookslot = async function(req,res){
         
     }
     if(req.body.slot_4){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_4 : {status : true, name, email, mobile, gender, age, state, city }},
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_4 : {status : true, patientId, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -237,7 +237,7 @@ doctorController.bookslot = async function(req,res){
         
     }
     if(req.body.slot_5){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_5 : {status : true, name, email, mobile, gender, age, state, city }},
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_5 : {status : true, patientId,  name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
@@ -250,7 +250,7 @@ doctorController.bookslot = async function(req,res){
         
     }
     if(req.body.slot_6){
-        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_6 : {status : true, name, email, mobile, gender, age, state, city }},
+        AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_6 : {status : true, patientId, name, email, mobile, gender, age, state, city }},
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {

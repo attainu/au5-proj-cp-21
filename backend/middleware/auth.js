@@ -12,6 +12,7 @@ function auth(req,res,next){
             const decoded = jwt.verify(token,SECRET_KEY)
             //add user from payload
             req.user = decoded;
+            
             next();
       }
       catch(e){

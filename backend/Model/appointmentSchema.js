@@ -12,6 +12,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -22,6 +25,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
@@ -36,6 +42,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -46,6 +55,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
@@ -60,6 +72,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -70,6 +85,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
@@ -84,6 +102,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -94,6 +115,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
@@ -108,6 +132,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -118,6 +145,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
@@ -132,6 +162,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String,
             default : false
         },
+        patientId : {
+            type : String
+        },
         name : {
             type : String
         },
@@ -142,6 +175,9 @@ const appointmentSchema = new mongoose.Schema({
             type : String
         },
         gender : {
+            type : String
+        },
+        age : {
             type : String
         },
         state : {
