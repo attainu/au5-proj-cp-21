@@ -83,10 +83,10 @@ class BookAppointment extends React.Component {
 
                         </div>
                         <div className="col-md-8">
-                            <h5>{this.state.name}</h5>
-                            <span>{this.props.myDoc.qualification}</span><br/>
-                            <span>{this.props.myDoc.specialisation}</span><br />
-                            <span>{this.props.myDoc.city}</span><br />
+                            Name:  <span>{this.props.myDoc.name}</span><br/>
+                            <span>Qualification: &nbsp;{this.props.myDoc.qualification}</span><br/>
+                            <span> Spaeciality: &nbsp;{this.props.myDoc.specialisation}</span><br />
+                            <span>City: &nbsp;{this.props.myDoc.city}</span><br />
 
 
 

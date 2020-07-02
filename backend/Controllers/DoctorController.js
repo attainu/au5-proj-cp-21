@@ -185,7 +185,9 @@ doctorController.appointment = function(req,res){
 }
    
 doctorController.bookslot = async function(req,res){
-    const { date, patientId, docId, name, email, mobile, gender, age, state, city  } = req.body
+    const { date, docId, name, email, mobile, gender, age, state, city  } = req.body
+    var patientId= req.user.id
+    console.log(req.body)
     if(req.body.slot_1){
         console.log("DoctorController 188", patientId, age)
         AppointmentSchema.findOneAndUpdate({ date : date, docId : docId },{slot_1 : {status : true, patientId, name, email, mobile, gender, age, state, city }},

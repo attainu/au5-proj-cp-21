@@ -15,7 +15,9 @@ import BookAppointment from  './component/BookAppointment'
 import Home from './component/Home'
 import DocProfile from './component/DocProfile';
 import DocBooking from './component/DocBooking';
-import VideoCall from './component/VideoCall'
+// import VideoCall from './component/VideoCall1'
+import Video from './component/videocall/Video'
+
 function App() {
   return (
     <div>
@@ -33,7 +35,9 @@ function App() {
           <Route exact path="/forgotpassword" component={ForgotPassword} />
           <Route  path="/bookappointment" component={BookAppointment} />
           <Route  path="/newpass" component={ChangePass} />
-          <Route path='/videocall/:id' component={VideoCall} />
+          <Route path='/videocall/:id' component={Video} />
+          {/* <Route path="/" exact component={goToRoomInput} /> */}
+          {/* <Route path="/:roomId" exact component={Video} /> */}
         </Switch>
       </BrowserRouter>
     </div>
