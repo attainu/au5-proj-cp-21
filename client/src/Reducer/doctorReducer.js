@@ -4,6 +4,7 @@ const intialState = {
    search:[],
    selecteddoctor : {},
    booking : {},
+   cBooking : {status : false},
    docSlot: {slot_1 : {status: "false"},slot_2 : {status: "false"},slot_3 : {status: "false"},slot_4 : {status: "false"},slot_5 : {status: "false"},slot_6 : {status: "false"}}
 }
 
@@ -18,6 +19,9 @@ export default function (state = intialState, action) {
             return stateCopy
             case "doc_booking":
                   stateCopy.booking= action.payload
+            return stateCopy
+            case "confirm_booking":
+                  stateCopy.cBooking= action.payload
             return stateCopy
             case "slots":
                   stateCopy.docSlot = action.payload

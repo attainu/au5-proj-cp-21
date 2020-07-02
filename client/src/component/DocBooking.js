@@ -24,8 +24,8 @@ class DocBooking extends React.Component {
     }
 
     buttonSlot = {
-        slot_1: {startHour : 18, endHour: 10, startMin: 0, endMin: 55},
-        slot_2: {startHour : 11, endHour: 11, startMin: 0, endMin: 30},
+        slot_1: {startHour : 10, endHour: 10, startMin: 0, endMin: 30},
+        slot_2: {startHour : 13, endHour: 13, startMin: 0, endMin: 30},
         slot_3: {startHour : 12, endHour: 12, startMin: 0, endMin: 30},
         slot_4: {startHour : 16, endHour: 16, startMin: 0, endMin: 30},
         slot_5: {startHour : 17, endHour: 17, startMin: 0, endMin: 30},
