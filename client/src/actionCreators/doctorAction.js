@@ -78,7 +78,7 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
             case "slot_2":
                   data.slot_2 = true
                   return function(dispatch){
@@ -94,7 +94,7 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
 
             case "slot_3":
                   data.slot_3 = true
@@ -111,7 +111,7 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
             case "slot_4":
                   data.slot_4 = true
                   return function(dispatch){
@@ -127,7 +127,7 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
             case "slot_5":
                   data.slot_5 = true
                   return function(dispatch){
@@ -143,7 +143,7 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
             case "slot_6":
                   data.slot_6 = true
                   return function(dispatch){
@@ -159,7 +159,9 @@ export function bookSlot(id, data) {
                                     console.log(err)
                               })
                   }
-                  break;
+                  //break;
+            default:
+                        
 
       }
 }

@@ -3,19 +3,20 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import SliderComponent from './slider'
 import Parallax from './Parallax'
+
 class Register extends Component {
       render() {
             
             return (
                   <div>
                         <Navbar/>
-                        <br/>
-                        <br/>
                         <Parallax/>
-                        
+                        <br />
+                        <hr />
+                        <h5 className="text-center">Testimonials</h5>
+                        <hr />
                         <SliderComponent />
-                        <br/>
-                        <br/>
+
                         <Footer/>
                   </div>
             )

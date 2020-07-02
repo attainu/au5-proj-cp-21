@@ -14,13 +14,14 @@ import styled from "styled-components";
 //   width: 100%;
 // `;
 const Video = styled.video`
-  // border: 1px solid blue;
-  // width: 70%;
-  // height: 70%;
+// border: 1px solid blue;
+// width: 70%;
+// height: 70%;
 `;
-function VideoCall() {
+function VideoCall(props) {
+  // console.log(props)
   const [yourID, setYourID] = useState("");
-  const [users, setUsers] = useState({});
+  const [users, setUsers] = useState("");
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState("");
@@ -29,29 +30,44 @@ function VideoCall() {
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
+ 
   useEffect(() => {
     socket.current = io.connect("http://localhost:3010/");
+   
+   
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       setStream(stream);
       if (userVideo.current) {
         userVideo.current.srcObject = stream;
       }
     })
-    socket.current.on("yourID", (id) => {
+    
+  // socket.current.on("yourID", (id) => {
       // console.log(id)
-      setYourID(id);
-    })
+    var data = {
+      pId: props.match.params.id2,
+      userId: props.match.params.id1
+    }
+    socket.current.emit('storeClientInfo', data);
+    console.log("======================================="+props.match.params.id1)
+    setYourID(props.match.params.id1);
+    // })
+    // setYourID(props.match.params.id1)
+     
+    // })
     socket.current.on("allUsers", (users) => {
       console.log(users)
       setUsers(users);
     })
     socket.current.on("hey", (data) => {
+      console.log(data)
       setReceivingCall(true);
       setCaller(data.from);
       setCallerSignal(data.signal);
     })
   }, []);
   function callPeer(id) {
+    // console.log(id)
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -72,7 +88,9 @@ function VideoCall() {
       stream: stream,
     });
     peer.on("signal", data => {
+      console.log(data)
       socket.current.emit("callUser", { userToCall: id, signalData: data, from: yourID })
+      console.log(data)
     })
     peer.on("stream", stream => {
       if (partnerVideo.current) {
@@ -148,14 +166,20 @@ function VideoCall() {
         {PartnerVideo}
       </div>
       <div className="acceptbtn">
-        {!callAccepted && Object.keys(users).map(key => {
-          if (key === yourID) {
-            return null;
-          }
-          return (
-            <button onClick={() => callPeer(key)}>Call {key}</button>
-          );
-        })}
+        {!callAccepted 
+        &&
+        //  Object.keys(users).map(key => {
+          // console.log("==========================="+key,yourID)
+          // if (key === yourID) {
+            // return null;
+          // }
+          // return (
+           
+          <button onClick={() => callPeer(users)}>Call {users}</button>
+          // );
+        // })
+        }
+        
       </div>{
         callAccepted && <div className="allbtn">
           <button
@@ -177,7 +201,7 @@ function VideoCall() {
         </div>
       }
       <div>
-        {incomingCall}
+        {!callAccepted && incomingCall}
       </div>
     </div>
   );

@@ -2,25 +2,29 @@ import React, { Component } from "react";
 import Navbar from "./Landing page/Navbar";
 import "../App.css";
 import Speciality from '../speciality.json'
-import { searchSpeciality} from '../actionCreators/doctorAction'
-import {connect } from 'react-redux'
+import { searchSpeciality } from '../actionCreators/doctorAction'
+import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import axios from "axios"
+
+
+
+
 class Dashboard extends Component {
-  state={
-    doctors:[],
-    searchTerm:""
+  state = {
+    doctors: [],
+    searchTerm: ""
   }
   handleSearch = (sp) => {
-   
+
     this.props.searchSpeciality(sp)
-   
+
     this.props.history.push(`/doctorprofile/${sp}`)
   }
-  getSearchByName=(val)=>{
+  getSearchByName = (val) => {
     // console.log(val)
     this.setState({
-      searchTerm:val
+      searchTerm: val
     })
     axios
       .get(`http://localhost:3010/doctorname/${val}`,
@@ -33,32 +37,39 @@ class Dashboard extends Component {
       .then(({ data }) => {
         console.log(data);
         this.setState({
-          doctors:data
+          doctors: data
         })
       })
       .catch(({ err }) => {
         console.log(err);
       });
-  
+
   }
   render() {
     // console.log(special)
     return (
       <div>
         <Navbar />
-       
+
         <div className="container-fluid">
-        <div className="row banner">
-          <div className="main">
-            <h3>Book Video Consultation With Your Doctor</h3>
-            <br />
-            <div class="form-group has-search">
-              <span class="fa fa-search form-control-feedback"></span>
-              <input type="text" class="form-control" placeholder="Search" onChange={(e)=>this.getSearchByName(e.target.value)}/>
+
+          <div className="row banner">
+            <div className="col-7">
+              <div className="main">
+                <h3>Book Video Consultation With Your Doctor</h3>
+                <br />
+                <div class="form-group has-search">
+                  <span class="fa fa-search form-control-feedback"></span>
+                  <input type="text" class="form-control" placeholder="Search" onChange={(e) => this.getSearchByName(e.target.value)} />
+                </div>
+              </div>
             </div>
+            <div className="col-5 main">
+               <a href="/appointments" class="btn btn-warning btn-lg" role="button" aria-pressed="true"><b>My Appointment</b></a>
+            </div>
+
           </div>
-        </div>
-        <div className="row mt-5">
+          <div className="row mt-5">
             {this.state.searchTerm === "" ? "" :
 
               this.state.doctors.map((doc, index) => (
@@ -89,25 +100,25 @@ class Dashboard extends Component {
                 </div>
               ))
             }
-        </div>
-         
-        <div className="row mt-5">
-          {Speciality.map((sp)=>(
-            <div className="col-md-4">
-              <button onClick={()=>this.handleSearch(sp.speciality)} className="speciality">
-                <img
-                  src={sp.image}
-                  alt="Cardiology"
-                  width="50px"
-                  height="50px"
-                  className="float-left"
-                />
-                <span>{sp.speciality}</span>
-              </button>
-            </div>
-           ) )}
-         
-        </div>
+          </div>
+
+          <div className="row mt-5">
+            {Speciality.map((sp) => (
+              <div className="col-md-4">
+                <button onClick={() => this.handleSearch(sp.speciality)} className="speciality">
+                  <img
+                    src={sp.image}
+                    alt="Cardiology"
+                    width="50px"
+                    height="50px"
+                    className="float-left"
+                  />
+                  <span>{sp.speciality}</span>
+                </button>
+              </div>
+            ))}
+
+          </div>
         </div>
       </div>
     );
@@ -115,10 +126,10 @@ class Dashboard extends Component {
 }
 
 
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
   return state
 }
-const mapDispatchToProps=(dispatch)=>{
-  return bindActionCreators({searchSpeciality},dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ searchSpeciality }, dispatch)
 }
-export default connect(mapStateToProps,mapDispatchToProps) (Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

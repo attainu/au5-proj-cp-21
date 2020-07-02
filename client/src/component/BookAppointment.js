@@ -11,16 +11,16 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class BookAppointment extends React.Component {
-   constructor(props){
-       super(props)
-       let url = window.location.pathname
-        let urlId =  url.split('/');
+    constructor(props) {
+        super(props)
+        let url = window.location.pathname
+        let urlId = url.split('/');
         this.props.selectDoctor(urlId[2])
-       let data_1 = new Date()
-       this.props.docSlott(data_1, urlId[2])
-   }
-   
-    
+        let data_1 = new Date()
+        this.props.docSlott(data_1, urlId[2])
+    }
+
+
     state = {
         date: new Date(),
         slot: "",
@@ -34,28 +34,28 @@ class BookAppointment extends React.Component {
         city: ""
     }
 
-    onChange = date => {     
+    onChange = date => {
         this.setState({ date },
             () => {
                 this.props.docSlott(this.state.date, this.props.myDoc._id)
             })
     }
-    
-   
+
+
 
     submit = (selectedSlot) => {
         let token = localStorage.getItem("patientAuth");
-        let request =  axios({
+        let request = axios({
             method: "GET",
             url: "http://localhost:3010/getuser",
             headers: {
                 "x-auth-token": token
             },
         });
-        request.then( (res) => {
+        request.then((res) => {
             this.setState({
                 slot: selectedSlot,
-                patientId : res.data._id,
+                patientId: res.data._id,
                 name: res.data.name,
                 email: res.data.email,
                 mobile: res.data.mobile,
@@ -63,60 +63,74 @@ class BookAppointment extends React.Component {
                 age: res.data.age,
                 state: res.data.state,
                 city: res.data.city
-                
+
             })
         })
         confirmAlert({
-          title: 'Confirm Booking',
-          message: 'Are you sure to do this.',
-          buttons: [
-            {
-              label: 'Yes',
-              onClick: () => {                 
-                this.props.bookSlot(this.props.myDoc._id, this.state)
-                this.props.history.push('/payment')                                  
-            }
-            },
-            {
-              label: 'No',
-              //onClick: () => {}
-            }
-          ]
+            title: 'Confirm Booking',
+            message: 'Are you sure to do this.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        this.props.bookSlot(this.props.myDoc._id, this.state)
+                        this.props.history.push('/payment')
+                    }
+                },
+                {
+                    label: 'No',
+                    //onClick: () => {}
+                }
+            ]
         })
     }
-    
+
     render() {
-        
+
         return (
             <div>
                 <Navbar />
+
                 <div className="container mt-5">
                     <div className="row">
-                        <div className="col-12">
-                            <img src={this.props.myDoc.image} style={{ width: "100px", height: "100px" }} alt="Doc Image"></img>
+                        <div className="col-md-4">
+                            <div class="card" style={{width: "22rem"}}>
+                                <div class="card-header text-center">
+                                    <b>{this.props.myDoc.name}</b>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <b>Qualification: </b><span> &nbsp;{this.props.myDoc.qualification}</span><br />
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Spaeciality:</b> <span> &nbsp;{this.props.myDoc.specialisation}</span><br />
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>City: </b><span> &nbsp;{this.props.myDoc.city}</span><br />
+                                    </li>
+                                </ul>
+                            </div>
 
-                            {/*  
-                        electeddoctor:
-LicenseNo: "8930"
-address: "sardarpura"
-age: "44"
-appointments: []
-bio: "I belives that once you start being more aware of your thoughts and actions, you will start appreciating life in a new way. This is why he specializes in depression, mood disorders, sexual disorders and anxiety disorders, because he feels that every person is capable of bringing about a change from within. His process is supportive, but aimed at direct interaction to help the patient bring about a visible change in himself or herself."
-city: "channai"
-email: "prathmeshkulkarni12@gmail.com"
-fees: "300"
-gender: "male"
-hospital: "Apollo Hospital chennai"
-image: "https://res.cloudinary.com/dsmr18nsi/image/upload/v1592757923/doctors%20images/14_i3lfeh.jpg"
-mobile: "9777997554"
-name: "Dr. Prathamesh Kulkarni"
-password: "123456789"
-qualification: "MCH (Cardiology Thoracic & Vascular Surgery)"
-specialisation: "Cardiology"
-state: "Tamilnadu"
-_id: "5ef0d7236b3f7f039c3c9f15"
 
- */}
+
+                        </div>
+                        <div className="col-md-4 text-center">
+                            <img className="rounded" src={this.props.myDoc.image} style={{ width: "80%", height: "80%" }} alt="doc"></img>
+                        </div>
+                        <div className="col-md-4">
+
+                        <div class="card" style={{width: "22rem"}}>
+                                <ul class="list-group list-group-flush">
+                                    
+                                    <li class="list-group-item">
+                                        <b>Bio: </b><span> &nbsp;{this.props.myDoc.bio}</span><br />
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Email: </b><span> &nbsp;{this.props.myDoc.email}</span><br />
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <hr></hr>
@@ -132,15 +146,15 @@ _id: "5ef0d7236b3f7f039c3c9f15"
                                     <p className="text-center"><b>Morning Slot</b></p>
 
                                     <p className="text-center" key="b_1">{
-                                        (this.props.slot.slot_1.status === 'false') ? <button type="button" value="slot_1" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>10:00AM - 10:30AM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>10:00AM - 10:30AM</b></button>
+                                        (this.props.slot.slot_1.status === 'false') ? <button type="button" value="slot_1" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>10:00AM - 10:30AM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>10:00AM - 10:30AM</b></button>
                                     }</p>
 
                                     <p className="text-center" key="b_2">{
-                                        (this.props.slot.slot_2.status === 'false') ? <button type="button" value="slot_2" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>11:00AM - 11:30AM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>11:00AM - 11:30AM</b></button>
+                                        (this.props.slot.slot_2.status === 'false') ? <button type="button" value="slot_2" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>11:00AM - 11:30AM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>11:00AM - 11:30AM</b></button>
                                     }</p>
 
                                     <p className="text-center" key="b_3">{
-                                        (this.props.slot.slot_3.status === 'false') ? <button type="button" value="slot_3" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>12:00AM - 12:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>12:00AM - 12:30PM</b></button>
+                                        (this.props.slot.slot_3.status === 'false') ? <button type="button" value="slot_3" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>12:00AM - 12:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>12:00AM - 12:30PM</b></button>
                                     }</p>
 
 
@@ -148,15 +162,15 @@ _id: "5ef0d7236b3f7f039c3c9f15"
                                 <div className="col-6">
                                     <p className="text-center"><b>Evening Slot</b></p>
                                     <p className="text-center" key="b_4">{
-                                        (this.props.slot.slot_4.status === 'false') ? <button type="button" value="slot_4" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>4:00PM - 4:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>4:00PM - 4:30PM</b></button>
+                                        (this.props.slot.slot_4.status === 'false') ? <button type="button" value="slot_4" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>4:00PM - 4:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>4:00PM - 4:30PM</b></button>
                                     }</p>
 
                                     <p className="text-center" key="b_5">{
-                                        (this.props.slot.slot_5.status === 'false') ? <button type="button" value="slot_5" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>5:00PM - 5:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>5:00PM - 5:30PM</b></button>
+                                        (this.props.slot.slot_5.status === 'false') ? <button type="button" value="slot_5" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>5:00PM - 5:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>5:00PM - 5:30PM</b></button>
                                     }</p>
 
                                     <p className="text-center" key="b_6">{
-                                        (this.props.slot.slot_6.status === 'false') ? <button type="button" value="slot_6" onClick={(e) => {this.submit(e.currentTarget.value)}} class="btn btn-outline-success mb-3" ><b>6:00PM - 6:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>6:00PM - 6:30PM</b></button>
+                                        (this.props.slot.slot_6.status === 'false') ? <button type="button" value="slot_6" onClick={(e) => { this.submit(e.currentTarget.value) }} class="btn btn-outline-success mb-3" ><b>6:00PM - 6:30PM</b></button> : <button type="button" class="btn btn-outline-danger mb-3" disabled><b>6:00PM - 6:30PM</b></button>
                                     }</p>
 
 
@@ -167,6 +181,8 @@ _id: "5ef0d7236b3f7f039c3c9f15"
                         </div>
                     </div>
                 </div>
+
+                <div style={{height : "50px"}} ></div>
 
 
             </div>

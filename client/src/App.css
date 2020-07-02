@@ -142,12 +142,12 @@ height: 600px;
 
 .banner{
   background-color:#F2F3F4;
-  height:300px;
+  height:250px;
   /* margin-top: 100px; */
 }
 
 .main {
-    width: 50%;
+    width: 80%;
     margin: 120px auto;
 }
 /* .sp{
@@ -245,4 +245,12 @@ height: 600px;
   justify-content: space-around;
   font-size:large;
   color: #05A8B2;
+}
+
+
+.test .parallax{
+  margin-top: 0px;
+}
+.parallax1 {
+  height: 700px;
 }
