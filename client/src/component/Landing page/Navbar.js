@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 // import "../../App.css";
@@ -20,9 +20,8 @@ function Navbar() {
   const logoutUser =()=>{
     localStorage.removeItem('patientAuth')
     localStorage.removeItem('doctorAuth')
+    localStorage.removeItem('setSplash')
   }
-  const password = useRef({});
-  var userData = null;
   const onSubmit = (data) => {
     axios.post("http://localhost:3010/verify", data).then(res => {
       if(res.data){
@@ -48,6 +47,7 @@ function Navbar() {
         }
           if(data.userinfo === 'patient' && res.data !== 'incorrectPassword' && res.data !== 'noUser' ){
             localStorage.setItem('patientAuth', res.data.token);
+           localStorage.setItem("setSplash",'true')
             if(res.data.user.name){
                history.push('/home')
             }else{
@@ -56,6 +56,7 @@ function Navbar() {
          }
          if(data.userinfo === 'doc' && res.data !== 'incorrectPassword' && res.data !== 'noUser'){
           localStorage.setItem('doctorAuth', res.data.token);
+         localStorage.setItem("setSplash", 'true')
           if(res.data.user.name){
             history.push('/docbooking')
           }else{
@@ -66,10 +67,10 @@ function Navbar() {
          
       }else{
         toast.error('Server Error, Try Again', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+      // console.log(res)
+
       }
-      
     })
-    
   }
   
   

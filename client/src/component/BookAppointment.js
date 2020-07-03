@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import Navbar from './Landing page/Navbar'
+import Footer from './Landing page/Footer'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { withRouter } from 'react-router-dom'
@@ -133,6 +134,7 @@ class BookAppointment extends React.Component {
                             </div>
                         </div>
                     </div>
+  
                     <hr></hr>
                     <h5 className="text-center">Book Appointment</h5>
                     <hr></hr>
@@ -181,9 +183,11 @@ class BookAppointment extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                <div style={{height : "50px"}} ></div>
-
+                <br/>
+               <div className="mt-5">
+                   
+                <Footer/>
+               </div>
 
             </div>
         )

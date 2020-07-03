@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from './Landing page/Navbar'
+import Footer from './Landing page/Footer'
 // import {selectDoctor} from '../actionCreators/doctorAction'
 // import { bindActionCreators } from "redux";
 import { withRouter} from 'react-router-dom'
@@ -50,6 +51,9 @@ class SearchPage extends Component {
                                     }
                               </div>
 
+                        </div>
+                        <div className="mt-5">
+                              <Footer />
                         </div>
                   </div>
 

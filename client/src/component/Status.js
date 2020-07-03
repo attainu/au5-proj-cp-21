@@ -5,17 +5,14 @@ import Footer from './Landing page/Footer'
 import failed from '../images/failed.png'
 
 class Status extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
+   
     result = () => {
         let url = window.location.pathname
         let urlId = url.split('/');
         if (urlId[2] === 'success') {
             return (
                 <div className="card mx-auto mt-3" style={{ width: "25rem" }}>
-                    <img className="card-img-top" src={failed} alt="Card image cap" />
+                    <img className="card-img-top" src={failed} alt="Card cap" />
                     <div className="card-body">
                         <h3 className="card-text">Registered Successfully.</h3>
                         <br />
@@ -29,7 +26,7 @@ class Status extends React.Component {
         if (urlId[2] === 'present') {
             return (
                 <div className="card mx-auto mt-3" style={{ width: "25rem" }}>
-                    <img className="card-img-top" src={failed} alt="Card image cap" />
+                    <img className="card-img-top" src={failed} alt="Card cap" />
                     <div className="card-body">
                         <h3 className="card-text">User is Already Present!!</h3>
                         <br />
@@ -42,7 +39,7 @@ class Status extends React.Component {
         if (urlId[2] === 'expired') {
             return (
                 <div className="card mx-auto mt-3" style={{ width: "25rem" }}>
-                    <img className="card-img-top" src={failed} alt="Card image cap" />
+                    <img className="card-img-top" src={failed} alt="Card cap" />
                     <div className="card-body">
                         <h3 className="card-text">Link is Expired!!</h3>
                         <br />
@@ -56,7 +53,7 @@ class Status extends React.Component {
         if (urlId[2] === 'nouser') {
             return (
                 <div className="card mx-auto mt-3" style={{ width: "25rem" }}>
-                    <img className="card-img-top" src={failed} alt="Card image cap" />
+                    <img className="card-img-top" src={failed} alt="Card cap" />
                     <div className="card-body">
                         <h3 className="card-text">No User found!!</h3>
                         <br />
@@ -70,7 +67,7 @@ class Status extends React.Component {
         if(urlId[2] === 'newpassword'){
             return (
                 <div className="card mx-auto mt-3" style={{ width: "25rem" }}>
-                    <img className="card-img-top" src={failed} alt="Card image cap" />
+                    <img className="card-img-top" src={failed} alt="Card cap" />
                     <div className="card-body">
                         <h3 className="card-text">Password Successfully Set!!</h3>
                         <br />

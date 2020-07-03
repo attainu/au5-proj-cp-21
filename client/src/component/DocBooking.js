@@ -8,7 +8,8 @@ import 'react-calendar/dist/Calendar.css';
 import { bindActionCreators } from "redux";
 import { docBooking } from '../actionCreators/doctorAction'
 import { withRouter, Link } from 'react-router-dom'
-// import shortId from 'shortid'
+import Footer from './Landing page/Footer';
+
 class DocBooking extends React.Component {
    constructor(props) {
         super(props)
@@ -127,6 +128,9 @@ class DocBooking extends React.Component {
                         </div>
 
                         </div>
+                </div>
+                <div className="mt-5">
+                    <Footer/>
                 </div>
             </div>
         )

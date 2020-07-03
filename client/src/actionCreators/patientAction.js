@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { compose } from 'redux'
-
 export function patientBooking(){
     return function(dispatch){
         return axios.get("http://localhost:3010/getbooking",

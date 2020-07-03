@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery'
-import Navbar from './Navbar'
-import speciality from '../../speciality.json'
+import Navbar from './Landing page/Navbar'
+import speciality from '../speciality.json'
+import Footer from './Landing page/Footer'
 import { useForm } from 'react-hook-form'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
@@ -31,20 +32,20 @@ function DoctorRegistration() {
   
     useEffect(() => {
         Aos.init({ duration: 2000 })
-        getStateCity()
+       // getStateCity()
     }, [])
-    const getStateCity=()=>{
-        let request = axios({
-            method: "GET",
-            url: "https://freegeoip.app/json/"
-        });
-        request.then(res => {
-            console.log(res.data.state)
-            setState(res.data.state)
-            setCity(res.data.city)
-        })
-
-    }
+    // const getStateCity=()=>{
+    //     let request = axios({
+    //         method: "GET",
+    //         url: "https://freegeoip.app/json/"
+    //     });
+    //     request.then(res => {
+    //         console.log(res.data.state)
+    //         setState(res.data.state)
+    //         setCity(res.data.city)
+    //     })
+ 
+    // } 
     const uploadPic = (image) => {
         const data = new FormData()
         data.append("file", image)
@@ -95,7 +96,7 @@ function DoctorRegistration() {
             <div className="container">
                 <div className="row">
                     <div className="col-5">
-                        <img data-aos="fade-right" src={require('../../images/20.jpg')} alt="" className="rounded" height="650px" />
+                        <img data-aos="fade-right" src={require('../images/20.jpg')} alt="" className="rounded" height="650px" />
                     </div>
                     <div className="col-6 doctor-register">
                         <h2>Welcome to Doctor Page</h2>
@@ -230,7 +231,9 @@ function DoctorRegistration() {
                 </div>
             </div>
         </div>
-         
+            <div className="mt-5">
+                <Footer />
+            </div>
         </div>
     )
 

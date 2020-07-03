@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import Navbar from './Landing page/Navbar'
 import failed from '../images/failed.png'
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
 
 
 class Payment extends React.Component {
@@ -11,7 +10,7 @@ class Payment extends React.Component {
         return (
             <div>
                 <div className="card mx-auto mt-5" style={{width: "18rem"}}>
-                        <img className="card-img-top" src={this.props.docInfo.image} alt="Card image cap" />
+                        <img className="card-img-top" src={this.props.docInfo.image} alt="Card cap" />
                         <div className="card-body">
                             <h5 className="card-title text-center">Booking Successful!!</h5>
                             <b>Name: </b> {this.props.docInfo.name}<br />
@@ -30,7 +29,7 @@ class Payment extends React.Component {
         return (
             <div>
                     <div className="card mx-auto mt-5" style={{width: "18rem"}}>
-                        <img className="card-img-top" src={failed} alt="Card image cap" />
+                        <img className="card-img-top" src={failed} alt="Card cap" />
                         <div className="card-body">
                             <h5 className="card-title text-center">Booking Failed!!</h5>
                             <h5 className="card-title text-center">Pleaser try again.</h5>

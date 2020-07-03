@@ -26,9 +26,6 @@ export default function (state = intialState, action) {
             case "confirm_booking":
                   stateCopy.cBooking= action.payload
             return stateCopy
-            case "slots":
-                  stateCopy.docSlot = action.payload
-            return stateCopy
             default:
                   return state;
       }

@@ -46,6 +46,9 @@ class Video extends React.Component {
     socket.on('disconnected', () => {
       component.setState({ initiator: true });
     });
+    socket.on("end",data=>{
+      component.setState({ initiator: true });
+    })
     socket.on('full', () => {
       component.setState({ full: true });
     });
@@ -113,8 +116,9 @@ class Video extends React.Component {
     });
   }
 
-  hangup(){
-    this.state.peer.removeStream(this.state.localStream);
+  hangup = ()=>{
+    // var popup = window.open('...');
+    window.close();
   }
   enter = roomId => {
     this.setState({ connecting: true });

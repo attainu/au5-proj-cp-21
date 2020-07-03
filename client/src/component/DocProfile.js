@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Navbar from './Landing page/Navbar'
+import Footer from './Landing page/Footer';
 function DocProfile() {
       const { register, handleSubmit, errors } = useForm();
       const [name, setName] = useState("")
@@ -132,6 +133,9 @@ function DocProfile() {
                               </div>
                         </div>
                   </div>
+                  <div className="mt-5">
+                        <Footer/>
+                        </div>
             </div>
       )
 }

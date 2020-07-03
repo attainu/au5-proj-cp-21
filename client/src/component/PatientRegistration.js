@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import Navbar from './Navbar'
+import Navbar from './Landing page/Navbar'
+import Footer from './Landing page/Footer'
 import { useForm } from 'react-hook-form'
 import {withRouter, useHistory} from 'react-router-dom';
 import axios from 'axios'
@@ -124,6 +125,9 @@ function PatientRegistrtation(){
                             </form>
                         </div>
                     </div>
+                </div>
+                <div className="mt-5">
+                    <Footer />
                 </div>
             </div>
         )

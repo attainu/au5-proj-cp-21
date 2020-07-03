@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Landing page/Navbar";
+import Footer from './Landing page/Footer'
 import "../App.css";
 import Speciality from '../speciality.json'
 import { searchSpeciality } from '../actionCreators/doctorAction'
@@ -126,6 +127,9 @@ class Dashboard extends Component {
             ))}
 
           </div>
+        </div>
+        <div className="mt-5">
+          <Footer />
         </div>
       </div>
     );

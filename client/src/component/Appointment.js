@@ -68,7 +68,8 @@ class Appointment extends React.Component {
                                                             Your Doctor
                                                         </button>
 
-                                                        <a href={"/" + item.patId} target="_blank" class="btn btn-warning float-right"><b>Join</b></a>
+                                                        <a href={"/videocall/" + item.patId} target="_blank" class="btn btn-warning float-right"><b>Join</b></a>
+                                                            
                                                     </div>
                                                 </div>
 
@@ -98,7 +99,7 @@ class Appointment extends React.Component {
                                 <div className="modal-body">
                                     <div className="row">
                                         <div className="col-5 mx-auto">
-                                            <img src={this.props.doc.image} style={{ height: "150px", width: "150px" }} alt="Doctor Image" />
+                                            <img src={this.props.doc.image} style={{ height: "150px", width: "150px" }} alt="Doctor" />
                                         </div>
                                         <div className="col-7">
                                             <div class="card" style={{ width: "22rem" }}>
