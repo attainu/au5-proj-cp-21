@@ -1,8 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { withRouter, useHistory} from 'react-router-dom'
+import { toast } from 'react-toastify'
 import axios from 'axios'
 
 function ChangePass(){
+  const history = useHistory()
     var token = localStorage.getItem('setpass')
     const { register, handleSubmit , errors} = useForm()
 
@@ -10,7 +13,16 @@ function ChangePass(){
         data.token = token
         delete data.cPassword
         axios.post("http://localhost:3010/setpass",data).then(res => {
-            console.log(res.data)
+            if(res.data === 'expired'){
+              history.push("http://localhost:3000/register/expired")
+            }
+            if(res.data === 'passwordSuccess'){
+              history.push('register/newpassword')
+            }
+            if(res.data === null){
+              toast.error('Server Error, Please Try again', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+
+            }
         })
         
     }
@@ -30,7 +42,7 @@ function ChangePass(){
                   {errors.password && <p style={{ color: "red" }}>Password must be 8 character long</p>}
                 </div>
                 <div className="form-group">
-                  <label for="cpass"><b>Please Enter Your Email</b></label>
+                  <label for="cpass"><b>Confirm Password</b></label>
                   <input type="password" className="form-control" id="cpass" name="cPassword" ref={register({ required: true, minLength : 8})} placeholder="Confirm New Password"></input>
                   {errors.cPassword && <p style={{ color: "red" }}>Password does not match</p>}
                 </div>
@@ -48,4 +60,4 @@ function ChangePass(){
     )
 }
 
-export default ChangePass
+export default withRouter(ChangePass)

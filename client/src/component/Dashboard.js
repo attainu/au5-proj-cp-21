@@ -6,6 +6,7 @@ import { searchSpeciality } from '../actionCreators/doctorAction'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 import axios from "axios"
+import $ from 'jquery'
 
 
 
@@ -50,6 +51,12 @@ class Dashboard extends Component {
     return (
       <div>
         <Navbar />
+        {
+                    (() => {
+                        $("body").removeClass("modal-open");
+                        $("div.modal-backdrop").remove();
+                    })()
+        }
 
         <div className="container-fluid">
 

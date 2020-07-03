@@ -24,7 +24,23 @@ const PatientSchema = new mongoose.Schema({
     },
     city: {
         type: String
-    }
+    },
+    booking : [
+        {
+            date : {
+                type : String
+            },
+            slot : {
+                type : String
+            },
+            docId: {
+                type : String
+            },
+            patId : {
+                type : String
+            } 
+        }
+    ]
 })
 
 const Patient = mongoose.model("patients", PatientSchema);

@@ -1,5 +1,6 @@
 const DoctorSchema = require('../Model/doctorSchema')
 const AppointmentSchema = require('../Model/appointmentSchema')
+const PatientSchema = require('../Model/patientSchema')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
@@ -22,15 +23,15 @@ doctorController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.redirect('http://localhost:3000/')
+                                res.redirect('http://localhost:3000/register/success')
                             })
                         }
                     })
-                }else{ res.send("user already exists")}
+                }else{ res.redirect('http://localhost:3000/register/present')}
             })
 
         } else (
-            res.send("This link is expired. Please register again.")
+            res.redirect('http://localhost:3000/register/expired')
         )
 
     })
@@ -41,27 +42,34 @@ doctorController.login = function(req,res){
     const { email, password} = req.body
     // console.log(req.body)
     DoctorSchema.findOne({email : email}).then( user => { 
-        bcrypt.compare(password, user.password, function(err,result){
-            if(result){
-                jwt.sign(
-                    {id : user._id},
-                    "sharma",
-                    { expiresIn : 3600},
-                    (err, token) => {
-                        if(err) throw err;
-                        res.json({
-                            token,
-                            user : {
-                                id : user.id,
-                                email : user.email
-                            }
-                        })
-                    }
-                )
-            }
-        });
- 
+        if(user){
+            bcrypt.compare(password, user.password, function(err,result){
+                if(result){
+                    jwt.sign(
+                        {id : user._id},
+                        "sharma",
+                        { expiresIn : 3600},
+                        (err, token) => {
+                            if(err) throw err;
+                            res.json({
+                                token,
+                                user : {
+                                    id : user.id,
+                                    email : user.email,
+                                    name : user.name
+                                }
+                            })
+                        }
+                    )
+                }else{
+                    res.send("incorrectPassword")
+                }
+            });
+        }else{
+            res.send("noUser")
+        }
     })
+   
     
  }
     
@@ -120,50 +128,54 @@ doctorController.setpass = function(req,res){
     // console.log(req.body)
     DoctorSchema.findOne({email : email}).then(user =>{
         // console.log(user)
-        let data = {
-            _id : user._id,
-            userInfo : userInfo
-        }
-        jwt.sign(
-            data,
-           "amit",
-           { expiresIn : 600},
-          async (err, token) => {
-               
-               if(err) throw err;
-               console.log("token",token)
-                 //step 1
-       let transpoter = nodemailer.createTransport({
-           host: 'smtp.gmail.com',
-           port: 465,
-           secure: true,
-           auth : {
-             user : "medicalapp331@gmail.com",
-             pass : "rajat@1993"
-           }
-         })
-     
-         //step 2
-         let mailOptions ={
-           from : "medicalapp331@gmail.com",
-           to : email,
-           subject : "Med - Tech ",
-           text: "IT works",
-           html:
-           "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=http://localhost:3010/setpass?token="+token+" target='_blank'>http://localhost:3010/setpass</a>"  
+        if(user){
+            let data = {
+                _id : user._id,
+                userInfo : userInfo
+            }
+            jwt.sign(
+                data,
+               "amit",
+               { expiresIn : 15*60},
+              async (err, token) => {
+                   
+                   if(err) throw err;
+                   console.log("token",token)
+                     //step 1
+           let transpoter = nodemailer.createTransport({
+               host: 'smtp.gmail.com',
+               port: 465,
+               secure: true,
+               auth : {
+                 user : "medicalapp331@gmail.com",
+                 pass : "rajat@1993"
+               }
+             })
+         
+             //step 2
+             let mailOptions ={
+               from : "medicalapp331@gmail.com",
+               to : email,
+               subject : "Med - Tech ",
+               text: "IT works",
+               html:
+               "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=http://localhost:3010/setpass?token="+token+" target='_blank'>http://localhost:3010/setpass</a>"  
+             }
+         
+           await  transpoter.sendMail(mailOptions, function(err, userData) {
+               if(err){
+                 console.log("error occurs",err)
+               }else{
+                 console.log("Email sent for set password", userData)
+                 res.json(token)
+               }
+             })
          }
-     
-       await  transpoter.sendMail(mailOptions, function(err, userData) {
-           if(err){
-             console.log("error occurs",err)
-           }else{
-             console.log("Email sent for set password", userData)
-             res.json(token)
-           }
-         })
-   }
-       )
-   
+           )
+
+        }else{
+            res.send("noUser")
+        }
     })
 
 }
@@ -197,7 +209,13 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_1", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
             }
         )
 
@@ -210,7 +228,13 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_2", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
             }
         )
 
@@ -223,7 +247,14 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_3", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
+                
             }
         )
         
@@ -236,7 +267,13 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_4", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
             }
         )
         
@@ -249,7 +286,13 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_5", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
             }
         )
         
@@ -262,7 +305,13 @@ doctorController.bookslot = async function(req,res){
                     console.log("hello arr", err)
                     res.send(null)
                 }
-                res.send(doc)
+                if(doc){
+                    PatientSchema.findOneAndUpdate({_id : patientId},{$push : {booking : { date: date, slot : "slot_6", docId : docId, patId : patientId }}}, 
+                    function(err,resp){
+                                if(err) console.log('Server Error')
+                            }) 
+                            res.send(doc)
+                        }
             }
         )
         

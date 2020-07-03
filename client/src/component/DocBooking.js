@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import $ from 'jquery'
 import Navbar from './Landing page/Navbar'
 import Calendar from 'react-calendar';
 import Clock from 'react-clock';
@@ -9,7 +10,7 @@ import { docBooking } from '../actionCreators/doctorAction'
 import { withRouter, Link } from 'react-router-dom'
 // import shortId from 'shortid'
 class DocBooking extends React.Component {
-    constructor(props) {
+   constructor(props) {
         super(props)
        
         let date = new Date()
@@ -26,7 +27,7 @@ class DocBooking extends React.Component {
 
     buttonSlot = {
         slot_1: {startHour : 10, endHour: 10, startMin: 0, endMin: 30},
-        slot_2: {startHour : 13, endHour: 13, startMin: 0, endMin: 30},
+        slot_2: {startHour : 11, endHour: 11, startMin: 0, endMin: 30},
         slot_3: {startHour : 12, endHour: 12, startMin: 0, endMin: 30},
         slot_4: {startHour : 16, endHour: 16, startMin: 0, endMin: 30},
         slot_5: {startHour : 17, endHour: 17, startMin: 0, endMin: 30},
@@ -53,7 +54,11 @@ class DocBooking extends React.Component {
          
       }
       onChange = dateCal => {
-        this.setState({ dateCal })
+        this.setState({ dateCal },
+            () => {
+                this.props.docBooking(this.state.dateCal.toLocaleDateString())
+            }
+            )
            
     }
     
@@ -63,10 +68,16 @@ class DocBooking extends React.Component {
         return (
             <div>
                 <Navbar />
+                {
+                    (() => {
+                        $("body").removeClass("modal-open");
+                        $("div.modal-backdrop").remove();
+                    })()
+                }
                 <div className="container mt-3">
                     <div className="row border border-warning">
                         <div className="col-6">
-                            <Calendar onChange={this.onChange} value={this.state.dateCal} minDate={new Date()} locale />
+                            <Calendar onChange={this.onChange} value={this.state.dateCal} locale />
                         </div>
                         <div className="col-6">
                             <Clock value={this.state.date}  />
@@ -88,7 +99,7 @@ class DocBooking extends React.Component {
                                 Object.entries(this.props.myBooking).map(([key, value], index) => {
                                     if (value.status === "true") {
                                         return (
-                                            <div class="card m-3 w-40">
+                                            <div class="card m-3 w-40" key={'docBooking'+index}>
                                                 <div class="card-header">
                                                     <b>{value.name}</b>
                                                     <h6 className="float-right" style={{ color: "red" }}>{this.timeSlot[key]}</h6>

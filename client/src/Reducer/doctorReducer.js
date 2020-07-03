@@ -17,8 +17,8 @@ export default function (state = intialState, action) {
              case "select_doctor":
                   stateCopy.selecteddoctor= action.payload
                   return stateCopy
-                  case "slots":
-                        stateCopy.docSlot = action.payload
+            case "slots":
+                  stateCopy.docSlot = action.payload
             return stateCopy
             case "doc_booking":
                   stateCopy.booking= action.payload

@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import React, { useRef, useState } from "react";
+import { toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 // import "../../App.css";
 import axios from "axios";
 import { useForm } from "react-hook-form"
@@ -11,6 +11,7 @@ import ParticlesBg from "particles-bg";
 function Navbar() {
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory()
+  
   const {
     register: register2,
     errors: errors2,
@@ -19,15 +20,16 @@ function Navbar() {
   const logoutUser =()=>{
     localStorage.removeItem('patientAuth')
     localStorage.removeItem('doctorAuth')
-
-
   }
   const password = useRef({});
   var userData = null;
   const onSubmit = (data) => {
     axios.post("http://localhost:3010/verify", data).then(res => {
-       
-      console.log(res.data)
+      if(res.data){
+        toast.success('We have Sent you a Mail, Please Verify', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+      }else{
+        toast.error('Server Error, Try Again', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+      }
     })
 
     //console.log(data)
@@ -36,14 +38,36 @@ function Navbar() {
   const onLogin = (data) => {
     console.log("login",data)
     axios.post("http://localhost:3010/login", data).then(res => {
-      // console.log(res)
-      if(data.userinfo == 'patient'){
-         localStorage.setItem('patientAuth', res.data.token);
-          history.push('/patient')
+      console.log("nav 41", res.data)
+      if(res.data){
+        if(res.data === "incorrectPassword") {
+          toast.error('Password is Incorrect', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+        }
+        if(res.data === "noUser"){
+          history.push("/register/nouser")
+        }
+          if(data.userinfo === 'patient' && res.data !== 'incorrectPassword' && res.data !== 'noUser' ){
+            localStorage.setItem('patientAuth', res.data.token);
+            if(res.data.user.name){
+               history.push('/home')
+            }else{
+              history.push('/patient')
+            }
+         }
+         if(data.userinfo === 'doc' && res.data !== 'incorrectPassword' && res.data !== 'noUser'){
+          localStorage.setItem('doctorAuth', res.data.token);
+          if(res.data.user.name){
+            history.push('/docbooking')
+          }else{
+                history.push('/doc')
+          }
+         }
+                
+         
       }else{
-      localStorage.setItem('doctorAuth', res.data.token);
-      history.push('/doc')
+        toast.error('Server Error, Try Again', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
       }
+      
     })
     
   }
@@ -72,6 +96,7 @@ function Navbar() {
                   </a>
 
               :
+          
             <button type="button" className="btn btn-warning mr-3" data-toggle="modal" data-target="#userLogin">
               <b>Login</b>
             </button>
@@ -93,7 +118,8 @@ function Navbar() {
           </div>
         </nav>
       </div>
-      <div className="modal fade" id="userLogin" data-backdrop="false" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userLogin" data-backdrop="true" tabindex="-1"
+        role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -109,7 +135,7 @@ function Navbar() {
               <div className="form-group">
                   <label className="d-block"><b>As a</b></label>
                   <input type="radio"  className="userInfo" name="userinfo" value="doc" ref={register2({required : true})}></input><b>  Doctor</b>
-                  <input type="radio" className="userInfo ml-5" name="userinfo" value="patient" ref={register2({required : true})}  ></input><b>  Patient</b>
+                  <input type="radio" className="userInfo ml-5" name="userinfo" value="patient" ref={register2({required : true})}  ></input><b>  User</b>
                   {errors2.userinfo && <p style={{ color: "red" }}>Please select one</p>}
                 </div>
                 <div className="form-group">
@@ -134,7 +160,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="modal fade" id="userSignup" data-backdrop="false" tabindex="-1" role="dialog"
+      <div className="modal fade" id="userSignup" data-backdrop="true" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
@@ -150,7 +176,7 @@ function Navbar() {
                 <div className="form-group">
                   <label className="d-block"><b>As a</b></label>
                   <input type="radio"  className="userInfo" name="userinfo" value="doc" ref={register({required : true})}></input><b>  Doctor</b>
-                  <input type="radio" className="userInfo ml-5" name="userinfo" value="patient" ref={register({required : true})}  ></input><b>  Patient</b>
+                  <input type="radio" className="userInfo ml-5" name="userinfo" value="patient" ref={register({required : true})}  ></input><b>  User</b>
                   {errors.userinfo && <p style={{ color: "red" }}>Please select one</p>}
                 </div>
 

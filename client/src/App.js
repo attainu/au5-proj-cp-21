@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify'
 import Splash from './component/Splash'
 import { Offline, Online } from "react-detect-offline";
 import Register from './component/Landing page/Register'
@@ -21,7 +22,9 @@ import Payment from './component/Payment';
 // import VideoCall from './component/VideoCall1'
 import Video from './component/videocall/Video'
 import Appointment from './component/Appointment';
+import Status from './component/Status'
 
+toast.configure()
 function App() {
   return (
     <div>
@@ -43,6 +46,9 @@ function App() {
           <Route path="/appointments" component={Appointment} />
           <Route  path="/newpass" component={ChangePass} />
           <Route path='/videocall/:id' component={Video} />
+          <Route path='/videocall/:id' component={Video} />
+          <Route path="/register/:status" component={Status} />
+
           {/* <Route path="/" exact component={goToRoomInput} /> */}
           {/* <Route path="/:roomId" exact component={Video} /> */}
         </Switch>

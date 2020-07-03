@@ -1,13 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import {toast} from 'react-toastify'
+import { withRouter, useHistory} from 'react-router-dom'
 function ForgotPassword() {
+  const history = useHistory()
   const { register, handleSubmit, errors } = useForm()
   const setPass = (data) => {
     axios.post("http://localhost:3010/setpassword",data).then(res => {
-      localStorage.setItem('setpass', res.data);
+      if(res.data === 'noUser'){
+        history.push("/register/nouser")
+      }else{
+        toast.success('We sent You a mail', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
+        localStorage.setItem('setpass', res.data);
+      }
     })
-  }
+  } 
   return (
     <div>
 
@@ -21,7 +29,7 @@ function ForgotPassword() {
                 <div className="form-group">
                   <label className="d-block"><b>As a</b></label>
                   <input type="radio" className="userInfo" name="userInfo" value="doc" ref={register({ required: true })}></input><b>  Doctor</b>
-                  <input type="radio" className="userInfo ml-5" name="userInfo" value="patient" ref={register({ required: true })}  ></input><b>  Patient</b>
+                  <input type="radio" className="userInfo ml-5" name="userInfo" value="patient" ref={register({ required: true })}  ></input><b>  User</b>
                   {errors.userInfo && <p style={{ color: "red" }}>Please select one</p>}
                 </div>
                 <div className="form-group">
@@ -42,4 +50,4 @@ function ForgotPassword() {
   )
 }
 
-export default ForgotPassword;
+export default withRouter(ForgotPassword);

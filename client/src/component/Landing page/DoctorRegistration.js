@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import $ from 'jquery'
 import Navbar from './Navbar'
 import speciality from '../../speciality.json'
 import { useForm } from 'react-hook-form'
@@ -6,6 +7,7 @@ import Aos from 'aos';
 import 'aos/dist/aos.css'
 import axios from 'axios'
 import {withRouter,useHistory} from 'react-router-dom'
+
 function DoctorRegistration() {
 
     const [name, setName] = useState("")
@@ -84,6 +86,12 @@ function DoctorRegistration() {
     return (
         <div>
             <Navbar />
+            {
+                    (() => {
+                        $("body").removeClass("modal-open");
+                        $("div.modal-backdrop").remove();
+                    })()
+            }
             <div className="container">
                 <div className="row">
                     <div className="col-5">

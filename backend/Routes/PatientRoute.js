@@ -17,5 +17,6 @@ router.get("/doctor/:search", auth, patientController.searchSpeciality)
 router.get('/getuser',auth,patientController.getUser)
 router.get('/doctorname/:name', auth, patientController.getSearchByName)
 router.get('/doctor/getbyid/:id',auth,patientController.getDocById)
+router.get('/getbooking', auth,patientController.patientBooking)
 
 module.exports = router

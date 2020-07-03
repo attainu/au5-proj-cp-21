@@ -21,15 +21,15 @@ patientController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.redirect('http://localhost:3000/')
+                                res.redirect('http://localhost:3000/register/success')
                             })
                         }
                     })
-                } else { res.send("user already exists") }
+                } else { res.redirect('http://localhost:3000/register/present') }
             })
 
         } else (
-            res.send("This link is expired. Please register again.")
+            res.redirect('http://localhost:3000/register/expired')
         )
 
     })
@@ -40,26 +40,32 @@ patientController.login = function (req, res) {
     const { email, password } = req.body
     // console.log(email, password)
     PatientSchema.findOne({ email: email }).then(user => {
-        bcrypt.compare(password, user.password, function (err, result) {
-            if (result) {
-                jwt.sign(
-                    { id: user._id },
-                    "sharma",
-                    { expiresIn: 3600 },
-                    (err, token) => {
-                        if (err) throw err;
-                        res.json({
-                            token,
-                            user: {
-                                id: user.id,
-                                email: user.email
-                            }
-                        })
-                    }
-                )
-            }
-        });
-
+        if(user){
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result) {
+                    jwt.sign(
+                        { id: user._id },
+                        "sharma",
+                        { expiresIn: 60*60*24 },
+                        (err, token) => {
+                            if (err) throw err;
+                            res.json({
+                                token,
+                                user: {
+                                    id: user.id,
+                                    email: user.email,
+                                    name : user.name
+                                }
+                            })
+                        }
+                    )
+                }else{
+                    res.send("incorrectPassword")
+                }
+            });
+        }else{
+            res.send("noUser")
+        }
     })
 }
 
@@ -153,6 +159,8 @@ patientController.setpass = function (req, res) {
                     })
                 }
             )
+            }else{
+                res.send('noUser')
             }
         })
 
@@ -166,5 +174,14 @@ patientController.getDocById = async(req,res)=>{
     // console.log(doc)
     res.send(doc)
 
+}
+
+patientController.patientBooking = function(req,res){
+    console.log("PatientController 172")
+    PatientSchema.findById(req.user.id,function(err,patient){
+        if(err)  res.send({})
+        console.log("pateitController 175",patient)
+        res.send(patient)
+    })
 }
 module.exports = patientController

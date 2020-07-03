@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import { useForm } from 'react-hook-form'
 import {withRouter, useHistory} from 'react-router-dom';
 import axios from 'axios'
+import $ from 'jquery'
 function PatientRegistrtation(){
     const [name, setName] = useState("")
     const [age, setAge] = useState("")
@@ -22,7 +23,6 @@ function PatientRegistrtation(){
             },
         });
         request.then(res => {
-            console.log(res)
             setName(res.data.name)
             setGender(res.data.gender)
             setAge(res.data.age)
@@ -56,6 +56,12 @@ function PatientRegistrtation(){
         return (
             <div>
                 <Navbar />
+                {
+                    (() => {
+                        $("body").removeClass("modal-open");
+                        $("div.modal-backdrop").remove();
+                    })()
+                }
                 <div className="container">
                     <div className="row">
                         <div className="col-5"></div>
