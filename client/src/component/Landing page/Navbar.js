@@ -19,6 +19,7 @@ function Navbar() {
   const logoutUser =()=>{
     localStorage.removeItem('patientAuth')
     localStorage.removeItem('doctorAuth')
+    localStorage.removeItem('setSplash')
 
 
   }
@@ -39,9 +40,12 @@ function Navbar() {
       // console.log(res)
       if(data.userinfo == 'patient'){
          localStorage.setItem('patientAuth', res.data.token);
+         localStorage.setItem("setSplash",'true')
           history.push('/patient')
       }else{
       localStorage.setItem('doctorAuth', res.data.token);
+        localStorage.setItem("setSplash", 'true')
+
       history.push('/doc')
       }
     })

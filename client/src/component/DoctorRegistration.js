@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar'
-import speciality from '../../speciality.json'
+import Navbar from './Landing page/Navbar'
+import speciality from '../speciality.json'
+import Footer from './Landing page/Footer'
 import { useForm } from 'react-hook-form'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
@@ -87,7 +88,7 @@ function DoctorRegistration() {
             <div className="container">
                 <div className="row">
                     <div className="col-5">
-                        <img data-aos="fade-right" src={require('../../images/20.jpg')} alt="" className="rounded" height="650px" />
+                        <img data-aos="fade-right" src={require('../images/20.jpg')} alt="" className="rounded" height="650px" />
                     </div>
                     <div className="col-6 doctor-register">
                         <h2>Welcome to Doctor Page</h2>
@@ -222,7 +223,9 @@ function DoctorRegistration() {
                 </div>
             </div>
         </div>
-         
+            <div className="mt-5">
+                <Footer />
+            </div>
         </div>
     )
 
