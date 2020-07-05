@@ -6,16 +6,15 @@ const jwt = require('jsonwebtoken');
 router.get("/setpass",(req,res) => {
     jwt.verify(req.query.token,"amit",function(err) {
         if(err){
-             res.redirect("http://localhost:3000/register/expired")
+            res.redirect("https://arogya-149.herokuapp.com/register/expired")
         }else{
-            res.redirect("http://localhost:3000/newpass")
+            res.redirect("https://arogya-149.herokuapp.com/newpass")
         }
     })
 })
  
 router.post("/setpass",(req,res) =>{
     const{ password } = req.body
-    console.log("newPassRoute 15", req.body)
     jwt.verify(req.body.token,"amit",function(err,decode){
         if(err){
             res.send("expired")

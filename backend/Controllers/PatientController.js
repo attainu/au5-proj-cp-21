@@ -21,15 +21,15 @@ patientController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.redirect('http://localhost:3000/register/success')
+                                res.redirect('https://arogya-149.herokuapp.com/register/success')
                             })
                         }
                     })
-                } else { res.redirect('http://localhost:3000/register/present') }
+                } else { res.redirect('https://arogya-149.herokuapp.com/register/present') }
             })
 
         } else (
-            res.redirect('http://localhost:3000/register/expired')
+            res.redirect('https://arogya-149.herokuapp.com/register/expired')
         )
 
     })
@@ -38,7 +38,6 @@ patientController.register = function (req, res) {
 
 patientController.login = function (req, res) {
     const { email, password } = req.body
-    // console.log(email, password)
     PatientSchema.findOne({ email: email }).then(user => {
         if(user){
             bcrypt.compare(password, user.password, function (err, result) {
@@ -73,7 +72,6 @@ patientController.addPatient = async (req, res) => {
     const userId = req.user.id
     const { name, gender, state, city, age } = req.body
     var patient = await PatientSchema.findOne({ _id: userId })
-    // console.log(patient)
     patient.name = name
     patient.gender = gender
     patient.state = state
@@ -97,7 +95,7 @@ patientController.searchSpeciality=async (req,res)=>{
 patientController.getUser = async (req,res)=>{
    const userId = req.user.id
    let patient = await PatientSchema.findOne({_id:userId})
-//    console.log(patient)
+
    res.send(patient)
 }
 
@@ -127,7 +125,6 @@ patientController.setpass = function (req, res) {
                 async (err, token) => {
 
                     if (err) throw err;
-                    console.log("token", token)
                     //step 1
                     let transpoter = nodemailer.createTransport({
                         host: 'smtp.gmail.com',
@@ -146,14 +143,14 @@ patientController.setpass = function (req, res) {
                         subject: "Med - Tech ",
                         text: "IT works",
                         html:
-                            "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=http://localhost:3010/setpass?token=" + token + " target='_blank'>http://localhost:3010/setpass</a>"
+                            "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=https://arogya-149.herokuapp.com/setpass?token=" + token + " target='_blank'>https://arogya-149.herokuapp.com/setpass</a>"
                     }
 
                     await transpoter.sendMail(mailOptions, function (err, userData) {
                         if (err) {
                             console.log("error occurs", err)
                         } else {
-                            console.log("Email sent for set password", userData)
+                            // console.log("Email sent for set password", userData)
                             res.json(token)
                         }
                     })
@@ -171,16 +168,14 @@ patientController.getDocById = async(req,res)=>{
     var userId = req.user.id
     var id = req.params.id
     let doc = await DoctorSchema.findOne({ _id: id })
-    // console.log(doc)
+
     res.send(doc)
 
 }
 
 patientController.patientBooking = function(req,res){
-    console.log("PatientController 172")
     PatientSchema.findById(req.user.id,function(err,patient){
         if(err)  res.send({})
-        console.log("pateitController 175",patient)
         res.send(patient)
     })
 }

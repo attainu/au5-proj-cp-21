@@ -29,7 +29,7 @@ const doctorSchema = new mongoose.Schema({
         type: String
     },
     language: {
-        type: String
+        type: Array
     },
     state: {
         type: String

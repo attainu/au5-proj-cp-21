@@ -3,7 +3,7 @@ SECRET_KEY = 'sharma'
 
 function auth(req,res,next){
       const token = req.header('x-auth-token');
-      // console.log(token)
+      
       // check for token
       if(!token)
         return res.status(401).json({msg:'No Token ,authorization denied'})

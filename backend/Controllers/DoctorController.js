@@ -9,7 +9,6 @@ const doctorController = {}
 
 doctorController.register = function (req, res) {
     jwt.verify(req.query.token, "amit", function (err, decode) {
-        // console.log('decode', decode)
         if (decode) {
             DoctorSchema.findOne({ email: decode.email }).then(user => {
                 if (!user) {
@@ -23,15 +22,15 @@ doctorController.register = function (req, res) {
                             })
                             newUser.save((err, user) => {
                                 if (err) return console.error(err);
-                                res.redirect('http://localhost:3000/register/success')
+                                res.redirect('https://arogya-149.herokuapp.com/register/success')
                             })
                         }
                     })
-                }else{ res.redirect('http://localhost:3000/register/present')}
+                } else { res.redirect('https://arogya-149.herokuapp.com/register/present')}
             })
 
         } else (
-            res.redirect('http://localhost:3000/register/expired')
+            res.redirect('https://arogya-149.herokuapp.com/register/expired')
         )
 
     })
@@ -40,7 +39,7 @@ doctorController.register = function (req, res) {
 
 doctorController.login = function(req,res){
     const { email, password} = req.body
-    // console.log(req.body)
+  
     DoctorSchema.findOne({email : email}).then( user => { 
         if(user){
             bcrypt.compare(password, user.password, function(err,result){
@@ -76,9 +75,9 @@ doctorController.login = function(req,res){
 
 doctorController.addDoctor= async(req,res)=>{
     const userId = req.user.id
-    const {name, gender, image, license, qualification,bio,specialisation,hospital,address,language,state,city,age,fees}=req.body
+    const {name, gender, image, license, qualification,bio,specialisation,hospital,address,lang,state,city,age,fees}=req.body
     const doctor = await DoctorSchema.findOne({_id:userId})
-    // console.log(doctor)
+  
     doctor.name=name
     doctor.gender=gender
     doctor.image=image
@@ -88,19 +87,18 @@ doctorController.addDoctor= async(req,res)=>{
     doctor.specialisation = specialisation
     doctor.hospital = hospital
     doctor.address = address
-    doctor.language = language
+    doctor.language = lang
     doctor.state=state
     doctor.city=city
     doctor.fees=fees
     doctor.age= age
     doctor.save();
-     console.log("new Registered DOc",doctor)
+    //  console.log("new Registered DOc",doctor)
 }
 
 doctorController.getDoctor= async (req,res)=>{
     const userId = req.user.id
     let doc = await DoctorSchema.findOne({ _id: userId })
-    //    console.log(patient)
     res.send(doc)
 }
 
@@ -117,7 +115,7 @@ doctorController.updateprofile = async (req,res)=>{
      doc.fees= fees
      doc.save();
      res.send(doc)
-    //  console.log(doc)
+
 }
 
 
@@ -125,9 +123,8 @@ doctorController.updateprofile = async (req,res)=>{
 //set New Password for Docotr
 doctorController.setpass = function(req,res){
     const { email, userInfo } = req.body
-    // console.log(req.body)
     DoctorSchema.findOne({email : email}).then(user =>{
-        // console.log(user)
+
         if(user){
             let data = {
                 _id : user._id,
@@ -140,7 +137,6 @@ doctorController.setpass = function(req,res){
               async (err, token) => {
                    
                    if(err) throw err;
-                   console.log("token",token)
                      //step 1
            let transpoter = nodemailer.createTransport({
                host: 'smtp.gmail.com',
@@ -159,14 +155,14 @@ doctorController.setpass = function(req,res){
                subject : "Med - Tech ",
                text: "IT works",
                html:
-               "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=http://localhost:3010/setpass?token="+token+" target='_blank'>http://localhost:3010/setpass</a>"  
+                   "Welcome to Med-Tech.Please click on Link to set Your New Password <br><a href=https://arogya-149.herokuapp.com/setpass?token=" + token +" target='_blank'>https://arogya-149.herokuapp.com/setpass</a>"  
              }
          
            await  transpoter.sendMail(mailOptions, function(err, userData) {
                if(err){
                  console.log("error occurs",err)
                }else{
-                 console.log("Email sent for set password", userData)
+                //  console.log("Email sent for set password", userData)
                  res.json(token)
                }
              })
@@ -206,7 +202,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -225,7 +221,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -244,7 +240,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -264,7 +260,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -283,7 +279,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -302,7 +298,7 @@ doctorController.bookslot = async function(req,res){
             {upsert: true, new : true},
             (err, doc) =>{
                 if (err) {
-                    console.log("hello arr", err)
+                    // console.log("hello arr", err)
                     res.send(null)
                 }
                 if(doc){
@@ -323,7 +319,7 @@ doctorController.booking = function(req,res){
     AppointmentSchema.findOne(req.body,
         (err, doc) =>{
             if (err) {
-                console.log("hello arr", err)
+                // console.log("hello arr", err)
                 res.send(null)
             }
             res.send(doc)
