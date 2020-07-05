@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import logo from '../../images/logo1.png'
 
 class Footer extends Component {
       render() {
@@ -22,7 +23,7 @@ class Footer extends Component {
                                   <div className="col-lg-2 mt-5">
                                         
                                           <ul className="first">
-                                                <h4 className="text-dark">PLATFORM</h4>
+                                                <h4 className="text-dark">Platform</h4>
                                               <li >Platform Overview</li>
                                               
                                               <li>Advantage</li>
@@ -39,8 +40,6 @@ class Footer extends Component {
                                                 <li >Search for Hospitals</li>
                                                 <li >Book Health checkup</li>
                                                 <li >Book Appointments</li>
-                                                <li >Read Health Articles</li>
-                                                <li >Read about Medicines</li>
                                           </ul>
                                     </div>
                                     <div className="col-lg-2 mt-5">
@@ -48,29 +47,20 @@ class Footer extends Component {
                                           <ul className="first">
                                                 <h4 className="text-dark">For Doctors</h4>
                                                 <li >Arogya Profile</li>
+                                                <li>Data Security</li>
+                                                <li>Verified Patients</li>
                                                
                                           </ul>
                                     </div>
-                                    <div className="col-lg-2 mt-5">
-
-                                          <ul className="first">
-                                                <h4 className="text-dark">More</h4>
-                                                <li >Help</li>
-                                                <li >Developers</li>
-                                                <li >Privacy Policy</li>
-                                                <li >Terms and Conditions</li>
-                                                <li >Health Care </li>
-
-
-
-                                          </ul>
-                                    </div>
                                     <div className="col-lg-1 mt-5">
-                                          <h4 className="text-dark">LOGO</h4>
+
+                                    </div>
+                                    <div className="col-lg-2 mt-5">
+                                          <h4 className="text-dark"><img src={logo} style={{height : "100%", width:"100%"}}/> </h4>
                                           <div className="social-icon">
-                                                <i class="fab fa-instagram"></i>
-                                                <i class="fab fa-facebook"></i>
-                                                <i class="fab fa-twitter"></i>
+                                                <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                                                <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                                                <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
                                           </div>
                                              
                                     </div>

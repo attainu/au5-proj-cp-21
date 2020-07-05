@@ -18,6 +18,7 @@ function ChangePass(){
             }
             if(res.data === 'passwordSuccess'){
               history.push('register/newpassword')
+              localStorage.removeItem('setpass')
             }
             if(res.data === null){
               toast.error('Server Error, Please Try again', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })

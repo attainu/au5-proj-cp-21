@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useRef }  from "react";
 import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 // import "../../App.css";
+import logo from '../../images/logo1.png'
 import axios from "axios";
 import { useForm } from "react-hook-form"
 import { withRouter, useHistory } from "react-router-dom";
-import ParticlesBg from "particles-bg";
-
-
+import $ from 'jquery'
 function Navbar() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory()
-  
+  const password = useRef({});
+  password.current = watch("password", "");
   const {
     register: register2,
     errors: errors2,
@@ -72,18 +72,25 @@ function Navbar() {
       }
     })
   }
-  
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 370) {
+      $('.navbar').removeClass('bg-transparent').addClass('bg-nav');
+    } else {
+      $('.navbar').removeClass('bg-nav').addClass('bg-transparent');
+    }
+  });
   
   return (
-    <div className="row shadow">
-      <div className="w-100">
-        <nav className="navbar navbar-expand-lg navbar-light bg-transparent ">
-          <ParticlesBg type="circle" bg={true} />
+   
+    <div className="row">
+      <div className="w-100 bg-nav">
+        <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+         
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand ml-5" href="/home">LOGO</a>
+          <a className="navbar-brand ml-5" href="/home"><img src={logo} style={{height : "100%", width:"100%"}}/></a>
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           {
@@ -104,7 +111,7 @@ function Navbar() {
           }
           {
             localStorage.getItem("patientAuth")?
-                <a  href="/" onClick ={logoutUser} className="btn btn-warning mr-5">
+                <a  href="/" onClick ={logoutUser} className="btn btn-warning mr-5 mb-5">
                   <b>Logout</b>
                 </a>
                 : localStorage.getItem("doctorAuth")
@@ -142,15 +149,17 @@ function Navbar() {
                 <div className="form-group">
                   <label for="userLoginEmail"><b>Email address</b></label>
                   <input type="email" className="form-control" id="userLoginEmail"
-                    aria-describedby="emailHelp" name="email" ref={register2({required : true})} placeholder="Enter email"></input>
+                    aria-describedby="emailHelp" name="email" ref={register2({required : true, pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/})} placeholder="Enter email"></input>
+                  {errors2.email && <p style={{ color: "red" }}>Please Enter Valid Email</p>}
                 </div>
                 <div className="form-group">
                   <a href="/forgotpassword" className="float-right text-warning" target="_blank">Forgot Password</a>
                 </div>
                 <div className="form-group">
                   <label for="userLoginPassword"><b>Password</b></label>
-                  <input type="password" className="form-control" name="password" ref={register2({required : true})} id="userLoginPassward"
+                  <input type="password" className="form-control" name="password" ref={register2({required : true, minLength: 8})} id="userLoginPassward"
                     placeholder="Password"></input>
+                  {errors2.password && <p style={{ color: "red" }}>Password should be 8 Character long</p>}
                 </div>
                 <div className="form-group">
                   <button type="submit" className="btn btn-warning"><b>Submit</b></button>
@@ -189,19 +198,29 @@ function Navbar() {
                 </div>
                 <div className="form-group">
                   <label for="mobNum"><b>Mobile Number</b></label>
-                  <input type="text" name="mobile" id="mobNum" className="form-control" ref={register({ required: true, min: 10, max: 10, pattern: /[7-9]{1}[0-9]{9}/ })} placeholder="Mobile number"></input>
+                  <input type="text" name="mobile" id="mobNum" className="form-control" ref={register({ required: true, minLength: 10, maxLength: 10, pattern: /[7-9]{1}[0-9]{9}/ })} placeholder="Mobile number"></input>
                   {errors.mobile && <p style={{ color: "red" }}>Mobile number is in-valid</p>}
                 </div>
                 <div className="form-group">
                   <label for="exampleInputPassword1"><b>Password</b></label>
-                  <input type="password" name="password" ref={register({ required: "You must specify a password", minLength: 8 })} className="form-control" id="exampleInputPassword1"
+                  <input type="password" name="password" ref={register({
+          required: "You must specify a password",
+          minLength: {
+            value: 8,
+            message: "Password must have at least 8 characters"
+          }
+        })} className="form-control" id="exampleInputPassword1"
                     placeholder="Password"></input>
-                  {errors.password && <p style={{ color: "red" }}>Password should be 8 character long</p>}
+                  {errors.password && <p style={{color : "red"}}>{errors.password.message}</p>}
                 </div>
                 <div className="form-group">
                   <label for="exampleInputPassword2"><b>Confirm Password</b></label>
-                  <input type="password" name="cPassword" ref={register({ required: true })} className="form-control" id="exampleInputPassword2"
+                  <input type="password" name="cPassword" ref={register({
+          validate: value =>
+            value === password.current || "The passwords do not match"
+        })} className="form-control" id="exampleInputPassword2"
                     placeholder="Confirm Password"></input>
+                  {errors.cPassword && <p style={{color : "red"}}>{errors.cPassword.message}</p>}
 
                 </div>
                 <div className="modal-footer">

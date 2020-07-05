@@ -12,7 +12,7 @@ router.get("/setpass",(req,res) => {
         }
     })
 })
- 
+  
 router.post("/setpass",(req,res) =>{
     const{ password } = req.body
     console.log("newPassRoute 15", req.body)

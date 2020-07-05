@@ -13,7 +13,8 @@ export default class Guide extends Component {
                 <img
                 data-aos="fade-right"
                 className="guide"
-                  src={require("../../images/4.jpg")}
+                  src={require("../../images/4-1.png")}
+                  style={{width: "380px", height:"284px "}}
                   alt=""
                 />
               </div>
@@ -38,8 +39,8 @@ export default class Guide extends Component {
                 <img
                   className="guide"
                   data-aos="fade-left"
-
-                  src={require("../../images/4.jpg")}
+                  style={{width: "380px", height:"284px", marginLeft:"70px"}}
+                  src={require("../../images/4.png")}
                   alt=""
                 />
               </div>

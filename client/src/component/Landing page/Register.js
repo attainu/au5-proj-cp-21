@@ -13,10 +13,9 @@ class Register extends Component {
                         <Parallax/>
                         <br />
                         <hr />
-                        <h5 className="text-center">Testimonials</h5>
+                        <h5 className="text-center">What our Users have to say</h5>
                         <hr />
                         <SliderComponent />
-
                         <Footer/>
                   </div>
             )

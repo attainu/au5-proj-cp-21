@@ -13,7 +13,7 @@ function ForgotPassword() {
       }else{
         toast.success('We sent You a mail', { position: toast.POSITION.TOP_RIGHT, autoClose: 5000 })
         localStorage.setItem('setpass', res.data);
-      }
+      } 
     })
   } 
   return (

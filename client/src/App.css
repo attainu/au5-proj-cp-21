@@ -40,6 +40,7 @@ body{
   width: 100%;
   height:100%;
   overflow-x: hidden;
+  color: #974660;
 }
 
 .test .parallax {
@@ -103,17 +104,34 @@ height: 600px;
   height: 100%;
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
-  background-position: center;
+  /* background-position: center; */
   background-repeat: no-repeat;
   background-size: cover;
   
 }
+
+.typical{
+  padding-top: 250px;
+  padding-left: 700px;
+}
+.btn-warning{
+  background-color: #FF8A76;
+  color: #974660;
+  border-color: #974660;
+}
+
+.btn-warning:hover{
+  background-color: #F98673;
+  border-color: #974660;
+}
 .parallax1{
-   background: linear-gradient(55deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 85%);
+  /* background: linear-gradient(55deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 85%); */
    height: 1000px; 
    background-color:transparent;
    font-size: 36px; 
 }
+
+
 .guide{
  border-radius: 15px 50px 30px;
 }
@@ -236,9 +254,9 @@ height: 600px;
 .first{
   list-style: none;
   text-align: left;
-  color: #05A8B2;
+  color: #BC9A39;
   font-weight: 500;
-  font-size: small;
+  font-size: medium;
 }
 .social-icon{
   display: flex;
@@ -314,3 +332,23 @@ background:white;
     }
 }
    
+
+
+/* changes */
+
+.bg-nav{
+  background-color: #B5B7DD;
+}
+
+.text-dark{
+  color : #974660 !important
+}
+
+.social-icon a{
+  color: #BC9A39;
+}
+
+.btn-warning:focus{
+  background-color: #FF8A76;
+  border-color: #FF8A76;
+}
