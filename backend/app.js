@@ -1,7 +1,7 @@
 const express  = require('express')
 var path = require("path")
 const cors = require('cors')
-
+require('dotenv').config()
 var app = express();
 
 app.use(express.json());
