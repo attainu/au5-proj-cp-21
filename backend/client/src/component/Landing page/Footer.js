@@ -13,11 +13,10 @@ class Footer extends Component {
                                           <ul className="first">
                                                 <h4 className="text-dark">Arogya</h4>
                                                 <li >About</li>
-
                                                 <li>Blog</li>
                                                 <li>Careers</li>
-                                                <li>Press</li>
-                                                <li>Contact Us</li>
+                                                <li><a href="/contactus">Contact Us</a></li>
+
                                           </ul>
                                     </div>
                                     <div className="col-lg-2 mt-5">
@@ -56,7 +55,7 @@ class Footer extends Component {
 
                                     </div>
                                     <div className="col-lg-2 mt-5">
-                                          <h4 className="text-dark"><img src={logo} style={{ height: "100%", width: "100%" }} /> </h4>
+                                          <h4 className="text-dark"><img src={logo} style={{ height: "100%", width: "100%" }} alt=""/> </h4>
                                           <div className="social-icon">
                                                 <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
                                                 <a href="#"><i class="fab fa-facebook fa-2x"></i></a>

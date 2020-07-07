@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from 'react-router-dom'
 import { selectDoctor } from '../actionCreators/doctorAction'
 import { patientBooking } from '../actionCreators/patientAction'
+import Footer from '../component/Landing page/Footer'
 class Appointment extends React.Component {
     constructor(props) {
         super(props)
@@ -24,6 +25,14 @@ class Appointment extends React.Component {
         slot_4: "4:00PM - 4:30PM",
         slot_5: "5:00PM - 5:30PM",
         slot_6: "6:00PM - 6:30PM"
+    }
+    buttonSlot = {
+        slot_1: { startHour: 10, endHour: 10, startMin: 0, endMin: 59 },
+        slot_2: { startHour: 11, endHour: 11, startMin: 0, endMin: 30 },
+        slot_3: { startHour: 12, endHour: 12, startMin: 0, endMin: 30 },
+        slot_4: { startHour: 16, endHour: 16, startMin: 0, endMin: 30 },
+        slot_5: { startHour: 17, endHour: 17, startMin: 0, endMin: 30 },
+        slot_6: { startHour: 18, endHour: 18, startMin: 0, endMin: 30 }
     }
 
 
@@ -67,8 +76,15 @@ class Appointment extends React.Component {
                                                         <button type="button" class="btn btn-outline-warning" onClick={() => { this.myDoc(item.docId) }} data-toggle="modal" data-target=".bd-example-modal-lg">
                                                             Your Doctor
                                                         </button>
+                                                        {(this.buttonSlot[item.slot].startHour === this.state.date.getHours() &&
+                                                            this.buttonSlot[item.slot].startMin <= this.state.date.getMinutes() &&
+                                                            this.buttonSlot[item.slot].endMin >= this.state.date.getMinutes()) ?
+                                                            <a href={"/videocall/" + item.patId} target="_blank" class="btn btn-warning float-right"><b>Join</b></a> :
+                                                            <a href={"/videocall/" + item.patId} target="_blank" class="btn btn-outline-danger float-right disabled"><b>Join</b></a>
 
-                                                        <a href={"/videocall/" + item.patId} target="_blank" class="btn btn-warning float-right"><b>Join</b></a>
+                                                        }
+
+                                                       
                                                             
                                                     </div>
                                                 </div>
@@ -126,6 +142,9 @@ class Appointment extends React.Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="mt-5">
+                    <Footer />
                 </div>
             </div>
         )

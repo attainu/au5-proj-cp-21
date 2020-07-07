@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import logo from '../../images/logo1.png'
 import axios from "axios";
 import { useForm } from "react-hook-form"
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory,Link } from "react-router-dom";
 import $ from 'jquery'
 function Navbar() {
   const { register, handleSubmit, errors, watch } = useForm();
@@ -91,9 +91,9 @@ function Navbar() {
           </button>
           {
             localStorage.getItem('doctorAuth') ?
-            <a className="navbar-brand ml-5" href="/docbooking"><img src={logo} style={{ height: "100%", width: "100%" }} /></a>
+            <a className="navbar-brand ml-5" href="/docbooking"><img src={logo} style={{ height: "100%", width: "100%" }} alt="" /></a>
             : 
-              <a className="navbar-brand ml-5" href="/home"><img src={logo} style={{ height: "100%", width: "100%" }} /></a>
+              <a className="navbar-brand ml-5" href="/home"><img src={logo} style={{ height: "100%", width: "100%" }}alt="" /></a>
           }
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -103,9 +103,9 @@ function Navbar() {
                   <b>Profile</b>
                 </a>
                 : localStorage.getItem("patientAuth")
-                  ? <a href="/patient" className="btn btn-warning mr-3">
+                  ? <Link to="/patient" className="btn btn-warning mr-3">
                     <b>Profile</b>
-                  </a>
+                  </Link>
 
                   :
 

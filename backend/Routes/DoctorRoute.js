@@ -13,7 +13,7 @@ router.post('/selectdoctor',auth,doctorController.doctor)
 router.post("/docslot",auth, doctorController.appointment)
 
 router.post("/bookslot",auth, doctorController.bookslot)
-//router.post('/doctor',auth,doctorController.doctor)
+
 router.get('/getdoctor', auth, doctorController.getDoctor)
 
 router.post("/booking",auth,doctorController.booking)

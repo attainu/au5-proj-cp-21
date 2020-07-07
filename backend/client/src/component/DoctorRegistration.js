@@ -80,7 +80,7 @@ function DoctorRegistration() {
         });
         request.then(res => {
             console.log(res)
-            history.push('/dashboard')
+            history.push('/docbooking')
         })
 
 

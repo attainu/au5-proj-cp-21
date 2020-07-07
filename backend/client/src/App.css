@@ -255,6 +255,10 @@ height: 600px;
   font-weight: 500;
   font-size: medium;
 }
+.first a{
+  color: #BC9A39;
+
+}
 .social-icon{
   display: flex;
   justify-content: space-around;
@@ -341,6 +345,10 @@ background:white;
   color : #974660 !important
 }
 
+.text-dark a{
+  color: #BC9A39;
+
+}
 .social-icon a{
   color: #BC9A39;
 }

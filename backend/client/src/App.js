@@ -20,7 +20,7 @@ import Payment from './component/Payment';
 import Video from './component/videocall/Video'
 import Appointment from './component/Appointment';
 import Status from './component/Status'
-
+import Conatct from './component/Landing page/contact'
 toast.configure()
 function App() {
 
@@ -40,7 +40,11 @@ function App() {
   else {
     return (
       <div>
-        <Offline>Only shown offline (surprise!)</Offline>
+        <Offline>
+          <div className="alert alert-danger text-center fixed-top" role="alert">
+            Weak Internet Connection!!
+          </div>
+        </Offline>
 
         <BrowserRouter>
           <Switch>
@@ -59,7 +63,7 @@ function App() {
             <Route path="/newpass" component={ChangePass} />
             <Route path='/videocall/:id' component={Video} />
             <Route path="/register/:status" component={Status} />
-
+            <Route path='/contactus' component={Conatct}/>
           </Switch>
         </BrowserRouter>
       </div>

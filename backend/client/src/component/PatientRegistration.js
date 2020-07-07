@@ -74,8 +74,11 @@ function PatientRegistrtation() {
             }
             <div className="container mt-5 ">
                 <div className="row">
+
+                    <h1 className="col-4 offset-md-3">Profile</h1>
+                </div>
+                <div className="row">
                     <div className="col-7 offset-md-3 p-3  rounded shadow">
-                        <h2>Welcome to User Page</h2>
                         <form onSubmit={handleSubmit(patientregister)}>
                             <div className="form-group">
                                 <label for="userName">
@@ -125,7 +128,7 @@ function PatientRegistrtation() {
                                     <b>Submit</b>
                                 </button> :
                                     <button type="submit" className="btn btn-warning">
-                                        <b>Save</b>
+                                        <b>Update</b>
                                     </button>
                             }
 
